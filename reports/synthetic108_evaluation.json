@@ -1,0 +1,1961 @@
+{
+  "scope": "Local routing/schema coverage, not full LLM advice or clinical correctness",
+  "cases": 108,
+  "turn_checks": 216,
+  "valid_schema_count": 216,
+  "gold_labels_available": false,
+  "accuracy": null,
+  "not_for_official_scoring": true,
+  "care_type_distribution": {
+    "clarification": 103,
+    "paramedic_home_visit": 61,
+    "emergency_112": 50,
+    "home_nursing": 2
+  },
+  "results": [
+    {
+      "case_id": "CASE_001",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_001",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_002",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_002",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_003",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_003",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_004",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_004",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_005",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_005",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_006",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_006",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_007",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_007",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_008",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_008",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_009",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_009",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_010",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": "knee"
+    },
+    {
+      "case_id": "CASE_010",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_011",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": "knee"
+    },
+    {
+      "case_id": "CASE_011",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": "knee"
+    },
+    {
+      "case_id": "CASE_012",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_012",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_013",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_013",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_014",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_014",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_015",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_015",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_016",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_016",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_017",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_017",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_018",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_018",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_019",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_019",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_020",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_020",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_021",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_021",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_022",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_022",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_023",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_023",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_024",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_024",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_025",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_025",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_026",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_026",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_027",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_027",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_028",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_028",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_029",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_029",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_030",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_030",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_031",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_031",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_032",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_032",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_033",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_033",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_034",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_034",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_035",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_035",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_036",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_036",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_037",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_037",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_038",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_038",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_039",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_039",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_040",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_040",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_041",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_041",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_042",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_042",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_043",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_043",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_044",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_044",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_045",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_045",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_046",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_046",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_047",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_047",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_048",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_048",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_049",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_049",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_050",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_050",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_051",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": "infection"
+    },
+    {
+      "case_id": "CASE_051",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_052",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_052",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_053",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_053",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_054",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_054",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_055",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_055",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_056",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_056",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_057",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_057",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_058",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_058",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_059",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_059",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_060",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_060",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_061",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_061",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_062",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_062",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_063",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_063",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_064",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_064",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_065",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_065",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_066",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_066",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_067",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": "knee"
+    },
+    {
+      "case_id": "CASE_067",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_068",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_068",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_069",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_069",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_070",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_070",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_071",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_071",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_072",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_072",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_073",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_073",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_074",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_074",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_075",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_075",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_076",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_076",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_077",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_077",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_078",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_078",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_079",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_079",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_080",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_080",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_081",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_081",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_082",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_082",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_083",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_083",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_084",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_084",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_085",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_085",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_086",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_086",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_087",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_087",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_088",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_088",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_089",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_089",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_090",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_090",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_091",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_091",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_092",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_092",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_093",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_093",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_094",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_094",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_095",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_095",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_096",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_096",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_097",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_097",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_098",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_098",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_099",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_099",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_100",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_100",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_101",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_101",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_102",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_102",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_103",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_103",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_104",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_104",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_105",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_105",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_106",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_106",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_107",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_107",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "clarification": false,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_108",
+      "turn": 1,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    },
+    {
+      "case_id": "CASE_108",
+      "turn": 2,
+      "schema_valid": true,
+      "care_type": null,
+      "urgency": null,
+      "clarification": true,
+      "curated_topic": null
+    }
+  ]
+}

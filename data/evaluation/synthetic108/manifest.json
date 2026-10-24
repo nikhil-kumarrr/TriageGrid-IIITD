@@ -1,0 +1,42 @@
+{
+  "case_count": 108,
+  "csv_jsonl_patient_turns_match": true,
+  "clinically_reviewed": false,
+  "training_enabled": false,
+  "runtime_retrieval_enabled": false,
+  "bot_executed": false,
+  "bot_syntax": {
+    "valid": false,
+    "line": 8,
+    "message": "invalid syntax"
+  },
+  "source_sha256": {
+    "indian_doctor_ai_108_dataset.csv": "e77bb3e0cee1c2d865cecbd7b3c243562f851e2c3fd642b1fedc23ddce6dd420",
+    "gemini_flash_doctor_108_dataset.jsonl": "0605a882c0da1afeb7368f0b9a7d247f28e909b5e398702da9f7e8ce9a7b6ba1",
+    "gemini_flash_doctor_bot.py": "4a8e69140e92c09ea5196dc8756fa15cbe989b605a583a26977658d509e3951b"
+  },
+  "review_required_examples": {
+    "CASE_003": "Child fever sponging conflicts with NHS guidance; dose not clinician verified.",
+    "CASE_066": "Fresh-burn cream advice conflicts with NHS first-aid guidance.",
+    "CASE_001": "Fixed fluid target and medicine schedule not individualised or clinically verified."
+  },
+  "missing_labels": [
+    "organiser care_type",
+    "organiser urgency",
+    "clinician-reviewed prescription ground truth"
+  ],
+  "categories_for_audit": {
+    "Bowel Care": 9,
+    "Eye & Summer Care": 9,
+    "Fever & Viral": 9,
+    "GI & Acidity": 9,
+    "Headache & Neuro": 9,
+    "Lifestyle & Chronic": 9,
+    "Oral, Dental & ENT": 9,
+    "Ortho & Joint Pain": 9,
+    "Pediatric & Senior": 9,
+    "Respiratory & ENT": 9,
+    "Skin & Wounds": 9,
+    "Women & Nutrition": 9
+  }
+}

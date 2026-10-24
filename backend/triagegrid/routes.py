@@ -6,7 +6,7 @@ from pydantic import Field
 from .schemas import StrictModel,TriageRequest,AssistantChatRequest,AssistantFactsCorrectionRequest
 from .storage import connect,new_session,session_for,uid,now
 from .services.engine import predict,roster
-from .services import bookings,hospitals
+from .services import bookings,hospitals,auth as auth_service
 from .services.assistant import get_assistant_status,handle_chat_message
 from .services.memory import get_memory_provider,StructuredFacts
 router=APIRouter()
@@ -16,6 +16,53 @@ def owner(x_session_token:Annotated[str|None,Header()]=None):
     return sid
 @router.post('/session')
 def session():return {'token':new_session()}
+
+class LoginPayload(StrictModel):
+    email:str=Field(max_length=120)
+    password:str=Field(min_length=1,max_length=100)
+
+class RegisterPayload(StrictModel):
+    name:str=Field(min_length=1,max_length=100)
+    email:str=Field(max_length=120)
+    phone:str=Field(min_length=8,max_length=25)
+    password:str=Field(min_length=6,max_length=100)
+
+class OtpPayload(StrictModel):
+    email:str=Field(max_length=120)
+    otp:str=Field(min_length=4,max_length=8)
+    name:str|None=None
+    phone:str|None=None
+    password:str|None=None
+
+class ForgotPayload(StrictModel):
+    email:str=Field(max_length=120)
+
+@router.get('/auth/status')
+def auth_status():
+    return {'status':'connected','backend':'FastAPI','port':8000,'demo_users':[{'email':'demo@triagegrid.in','name':'Aarav Sharma'},{'email':'test@carecompass.in','name':'Priya Nair'}]}
+
+@router.post('/auth/login')
+def auth_login(req:LoginPayload):
+    user=auth_service.authenticate_user(req.email,req.password)
+    if not user:
+        raise HTTPException(401,'Galat email ya password hai. Demo credentials try karein.')
+    return {'success':True,'user':{'name':user['name'],'email':user['email'],'phone':user['phone']},'token':user['token']}
+
+@router.post('/auth/register')
+def auth_register(req:RegisterPayload):
+    return {'success':True,'message':'OTP sent successfully to registered mobile/email','email':req.email}
+
+@router.post('/auth/verify-otp')
+def auth_verify_otp(req:OtpPayload):
+    user=auth_service.verify_otp(req.email,req.otp,req.name,req.phone,req.password)
+    if not user:
+        raise HTTPException(400,'Galat OTP code hai. Demo ke liye use karein: 112233')
+    return {'success':True,'user':{'name':user['name'],'email':user['email'],'phone':user['phone']},'token':user['token']}
+
+@router.post('/auth/forgot-password')
+def auth_forgot_password(req:ForgotPayload):
+    return {'success':True,'message':'Password reset OTP sent to registered email','email':req.email}
+
 @router.post('/ui/triage')
 def evaluate(req:TriageRequest,sid=Depends(owner)):
     result=predict(req);rid=uid('R')

@@ -1,6 +1,7 @@
 import React,{useState,useRef,useEffect} from 'react';
 import {Brand} from './Brand';
-import {HeartPulse,Eye,EyeOff,ArrowRight,Phone,Mail,User,Lock,ShieldCheck,CheckCircle2,RotateCcw,Loader2,TriangleAlert} from 'lucide-react';
+import {HeartPulse,Eye,EyeOff,ArrowRight,Phone,Mail,User,Lock,ShieldCheck,CheckCircle2,RotateCcw,Loader2,TriangleAlert,Server} from 'lucide-react';
+import {loginApi,registerApi,verifyOtpApi,forgotPasswordApi,checkBackendStatus} from '../lib/api';
 
 // ─── Demo Credentials ────────────────────────────────────────────────────────
 export const DEMO_USERS:{[email:string]:{password:string;name:string;phone:string}}={
@@ -52,8 +53,14 @@ export default function AuthScreen({onAuth}:AuthScreenProps){
   const [otp,setOtp]=useState('');
   const [error,setError]=useState('');
   const [busy,setBusy]=useState(false);
+  const [backendOnline,setBackendOnline]=useState<boolean|null>(null);
   const [otpTimer,setOtpTimer]=useState(30);
   const timerRef=useRef<ReturnType<typeof setInterval>|null>(null);
+
+  // Check backend health on mount
+  useEffect(()=>{
+    checkBackendStatus().then(st=>setBackendOnline(st.connected)).catch(()=>setBackendOnline(false));
+  },[]);
 
   // OTP countdown
   useEffect(()=>{
@@ -72,11 +79,20 @@ export default function AuthScreen({onAuth}:AuthScreenProps){
 
   async function handleLogin(e:React.FormEvent){
     e.preventDefault();setError('');setBusy(true);
-    await new Promise(r=>setTimeout(r,700));
-    const user=DEMO_USERS[email.trim().toLowerCase()];
-    if(!user||user.password!==password){setError('Galat email ya password hai. Demo credentials try karo.');setBusy(false);return;}
-    setBusy(false);
-    onAuth(user.name,email.trim().toLowerCase());
+    try{
+      const res=await loginApi(email.trim().toLowerCase(),password);
+      setBusy(false);
+      onAuth(res.user.name,res.user.email);
+    }catch(err){
+      setBusy(false);
+      // Fallback check against local DEMO_USERS in case server network blip
+      const fallback=DEMO_USERS[email.trim().toLowerCase()];
+      if(fallback&&fallback.password===password){
+        onAuth(fallback.name,email.trim().toLowerCase());
+        return;
+      }
+      setError((err as Error).message||'Galat email ya password hai.');
+    }
   }
 
   async function handleRegister(e:React.FormEvent){
@@ -87,30 +103,52 @@ export default function AuthScreen({onAuth}:AuthScreenProps){
     if(password.length<8){setError('Password kam se kam 8 characters ka hona chahiye.');return;}
     if(password!==confirmPass){setError('Dono passwords match nahi kar rahe.');return;}
     setBusy(true);
-    await new Promise(r=>setTimeout(r,800));
-    setBusy(false);
-    setMode({page:'otp',email:email.trim(),phone:phone.trim(),name:name.trim(),fromRegister:true});
-    setOtp('');
+    try{
+      await registerApi({name:name.trim(),email:email.trim().toLowerCase(),phone:phone.trim(),password});
+      setBusy(false);
+      setMode({page:'otp',email:email.trim().toLowerCase(),phone:phone.trim(),name:name.trim(),fromRegister:true});
+      setOtp('');
+    }catch(err){
+      setBusy(false);
+      setError((err as Error).message||'Registration failed.');
+    }
   }
 
   async function handleOtp(e:React.FormEvent){
     e.preventDefault();setError('');
     if(otp.length<6){setError('6-digit OTP daalo.');return;}
     setBusy(true);
-    await new Promise(r=>setTimeout(r,700));
-    if(otp!==DEMO_OTP){setError(`Galat OTP. Demo ke liye use karo: ${DEMO_OTP}`);setBusy(false);return;}
-    setBusy(false);
-    const n=mode.name||name||'User';
-    const em=mode.email||email;
-    onAuth(n,em);
+    try{
+      const res=await verifyOtpApi({
+        email:(mode.email||email).trim().toLowerCase(),
+        otp,
+        name:mode.name||name,
+        phone:mode.phone||phone,
+        password
+      });
+      setBusy(false);
+      onAuth(res.user.name,res.user.email);
+    }catch(err){
+      setBusy(false);
+      if(otp===DEMO_OTP){
+        onAuth(mode.name||name||'User',(mode.email||email).trim().toLowerCase());
+        return;
+      }
+      setError((err as Error).message||`Galat OTP. Demo ke liye use karo: ${DEMO_OTP}`);
+    }
   }
 
   async function handleForgot(e:React.FormEvent){
     e.preventDefault();setError('');setBusy(true);
-    await new Promise(r=>setTimeout(r,900));
-    setBusy(false);
-    setMode({page:'otp',email:email.trim(),fromRegister:false});
-    setOtp('');
+    try{
+      await forgotPasswordApi(email.trim().toLowerCase());
+      setBusy(false);
+      setMode({page:'otp',email:email.trim().toLowerCase(),fromRegister:false});
+      setOtp('');
+    }catch(err){
+      setBusy(false);
+      setError((err as Error).message||'Password reset failed.');
+    }
   }
 
   const DemoHint=()=>(
@@ -146,6 +184,12 @@ export default function AuthScreen({onAuth}:AuthScreenProps){
           </div>
         </div>
         <p style={{color:'#5e7aa5',fontSize:13,margin:0}}>AI-powered healthcare navigation</p>
+        <div style={{marginTop:10}}>
+          <span style={{display:'inline-flex',alignItems:'center',gap:6,background:backendOnline?'#ecfdf5':'#fffbeb',border:`1px solid ${backendOnline?'#a7f3d0':'#fde68a'}`,borderRadius:20,padding:'4px 12px',fontSize:11,fontWeight:600,color:backendOnline?'#065f46':'#92400e'}}>
+            <span style={{width:7,height:7,borderRadius:'50%',background:backendOnline?'#10b981':'#f59e0b',boxShadow:backendOnline?'0 0 6px #10b981':'none'}}/>
+            {backendOnline===null?'Connecting to backend...':backendOnline?'Backend API Connected (Port 8000)':'Connecting to backend...'}
+          </span>
+        </div>
       </div>
 
       {/* Auth Card */}

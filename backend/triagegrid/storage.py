@@ -24,6 +24,7 @@ def initialize():
         CREATE TABLE IF NOT EXISTS assistant_messages(id TEXT PRIMARY KEY,session_id TEXT REFERENCES sessions(id),role TEXT,text TEXT,metadata TEXT,created TEXT);
         CREATE INDEX IF NOT EXISTS assistant_msg_session ON assistant_messages(session_id,created);
         CREATE TABLE IF NOT EXISTS assistant_facts(session_id TEXT PRIMARY KEY REFERENCES sessions(id),facts TEXT,updated TEXT);
+        CREATE TABLE IF NOT EXISTS users(id TEXT PRIMARY KEY,name TEXT,email TEXT UNIQUE,phone TEXT,password_hash TEXT,created TEXT);
         ''')
 initialize()
 def new_session():
