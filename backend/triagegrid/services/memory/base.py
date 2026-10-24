@@ -33,6 +33,8 @@ class StructuredFacts:
     warning_signs: dict[str, str] = field(default_factory=dict)  # flag_name -> 'confirmed' | 'denied' | 'not_mentioned'
     existing_conditions: list[str] = field(default_factory=list)
     allergies_medications: list[str] = field(default_factory=list)
+    family_history: list[dict[str, str]] = field(default_factory=list)
+    uploaded_documents: list[dict[str, str]] = field(default_factory=list)
     care_preference: str = "unspecified"
     uncertainties: list[str] = field(default_factory=list)
     source_message_id: str | None = None

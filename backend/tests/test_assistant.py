@@ -193,3 +193,39 @@ def test_successful_handoff_to_booking(monkeypatch):
     assert slots_res.status_code == 200
     assert "slots" in slots_res.json()
 
+def test_multimodal_document_upload_and_family_memory(monkeypatch):
+    monkeypatch.setenv("ASSISTANT_PROVIDER", "mock")
+    token = create_session()
+
+    # Synthetic 1x1 PNG data
+    fake_png_base64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+
+    res = client.post(
+        "/assistant/chat",
+        headers={"X-Session-Token": token},
+        json={
+            "message": "Here is my father's previous prescription, he has chronic hypertension and diabetes",
+            "language": "English",
+            "image_base64": fake_png_base64,
+            "image_mime_type": "image/png"
+        },
+    )
+    assert res.status_code == 200
+    data = res.json()
+    facts = data["structured_facts"]
+
+    # Verify document extracted
+    assert len(facts["uploaded_documents"]) >= 1
+    assert facts["uploaded_documents"][0]["doc_type"] == "prescription"
+
+    # Verify family history recorded
+    assert len(facts["family_history"]) >= 1
+    assert any(f["relation"] == "father" for f in facts["family_history"])
+
+    # Verify persistence in conversation endpoint
+    conv_res = client.get("/assistant/conversation", headers={"X-Session-Token": token})
+    assert conv_res.status_code == 200
+    conv_data = conv_res.json()
+    assert len(conv_data["structured_facts"]["uploaded_documents"]) >= 1
+    assert len(conv_data["structured_facts"]["family_history"]) >= 1
+

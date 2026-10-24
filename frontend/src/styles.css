@@ -48,8 +48,19 @@
 .micComposerBtn:hover{background:#e0ebfa;color:#285797}
 .micComposerBtn.activeMic{background:#ee4970;color:white;border-color:#ee4970;animation:pulse 1.2s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 #ee497066}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.composerActionBtn{width:42px;min-width:42px;padding:0;background:#eff4fb;color:#4571ae;border:1px solid #d8e5f6;border-radius:14px;display:grid;place-items:center}
+.composerActionBtn:hover{background:#e0ebfa;color:#285797}
+.composerActionBtn.hasAttachment{background:#e6f9f0;color:#26a269;border-color:#a8ecc8}
+.imagePreviewCard{display:flex;align-items:center;gap:10px;background:#f2f7ff;border:1px solid #cce0ff;border-radius:14px;padding:8px 12px;margin-bottom:6px}
+.imageThumbnail{width:40px;height:40px;border-radius:8px;object-fit:cover;border:1px solid #b8d4fe}
+.previewInfo{flex:1;overflow:hidden}
+.previewInfo b{display:block;font-size:11px;color:#274b7a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.previewInfo small{font-size:10px;color:#6182ad;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.docTagInBubble{display:inline-flex;align-items:center;gap:5px;background:#ebf3fe;color:#356ec3;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:700;margin-bottom:6px}
 .unconfiguredBanner{background:#fff8eb;border:1px solid #fae3be;border-radius:18px;padding:16px 20px;color:#875411;margin:10px 0}
 .unconfiguredBanner h3{margin:0 0 6px;font-size:14px;display:flex;align-items:center;gap:8px}
 .unconfiguredBanner p{font-size:12px;line-height:1.6;margin:0 0 12px}
-.unconfiguredBanner button{margin:0}
-
+.removePreviewBtn{width:28px;height:28px;min-width:28px;min-height:28px;border-radius:8px;padding:0;background:transparent;color:#7892b4;display:grid;place-items:center;border:none;cursor:pointer}
+.removePreviewBtn:hover{background:#e2ecf9;color:#2b4d79}
+.historyChip{display:inline-block;background:#f3edff;color:#6933bb;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;margin:2px 4px 2px 0}
+.docChip{display:inline-flex;align-items:center;gap:4px;background:#eef5fc;color:#2c68b8;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;margin:2px 4px 2px 0}

@@ -39,9 +39,17 @@ class TriageResponse(StrictModel):
         return self
 
 class AssistantChatRequest(StrictModel):
-    message: str = Field(min_length=1, max_length=5000)
+    message: str = Field(default="", max_length=10000)
     language: Literal["auto", "English", "Hindi", "Hinglish"] = "auto"
     location: Location | None = None
+    image_base64: str | None = None
+    image_mime_type: str | None = None
+
+    @model_validator(mode="after")
+    def validate_content(self):
+        if not self.message.strip() and not self.image_base64:
+            raise ValueError("Either message text or an uploaded image is required.")
+        return self
 
 class AssistantFactsCorrectionRequest(StrictModel):
     facts: dict[str, Any]

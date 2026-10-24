@@ -27,6 +27,8 @@ class GeminiAdapter(LLMAdapter):
         existing_facts: dict[str, Any],
         current_message: str,
         language: str = "English",
+        image_base64: str | None = None,
+        image_mime_type: str | None = None,
     ) -> LLMResponse:
         if not self.is_configured():
             raise RuntimeError("Gemini API key is not configured on the server.")
@@ -34,6 +36,17 @@ class GeminiAdapter(LLMAdapter):
         prompt = format_user_prompt(messages, existing_facts, current_message, language)
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}"
         
+        parts: list[dict[str, Any]] = [{"text": prompt}]
+        if image_base64:
+            clean_b64 = image_base64.split(",")[-1] if "," in image_base64 else image_base64
+            mime = image_mime_type or "image/jpeg"
+            parts.append({
+                "inline_data": {
+                    "mime_type": mime,
+                    "data": clean_b64
+                }
+            })
+
         payload = {
             "systemInstruction": {
                 "parts": [{"text": SYSTEM_INSTRUCTION}]
@@ -41,7 +54,7 @@ class GeminiAdapter(LLMAdapter):
             "contents": [
                 {
                     "role": "user",
-                    "parts": [{"text": prompt}]
+                    "parts": parts
                 }
             ],
             "generationConfig": {

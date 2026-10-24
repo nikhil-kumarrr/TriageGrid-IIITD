@@ -145,6 +145,8 @@ def assistant_chat(req:AssistantChatRequest,sid=Depends(owner)):
         user_text=req.message,
         language=req.language,
         location=req.location,
+        image_base64=req.image_base64,
+        image_mime_type=req.image_mime_type,
     )
 
 @router.post('/assistant/facts/correct')

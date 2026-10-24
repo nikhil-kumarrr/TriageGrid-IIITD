@@ -38,11 +38,16 @@ def handle_chat_message(
     user_text: str,
     language: str = "auto",
     location: Location | None = None,
+    image_base64: str | None = None,
+    image_mime_type: str | None = None,
     custom_adapter = None,
 ) -> dict[str, Any]:
-    text = user_text.strip()
-    if not text:
-        raise HTTPException(400, "Message cannot be empty")
+    text = (user_text or "").strip()
+    if not text and not image_base64:
+        raise HTTPException(400, "Message or uploaded medical document is required.")
+    
+    if not text and image_base64:
+        text = "Uploaded a medical document / prescription for analysis."
 
     mem = get_memory_provider()
     adapter = custom_adapter or get_llm_adapter()
@@ -52,7 +57,11 @@ def handle_chat_message(
         language = detect_language(text)
 
     # 2. Add user message to session memory
-    user_msg = mem.add_message(session_id, "user", text, {"language": language})
+    user_meta = {"language": language}
+    if image_base64:
+        user_meta["has_image"] = True
+        user_meta["mime"] = image_mime_type or "image/jpeg"
+    user_msg = mem.add_message(session_id, "user", text, user_meta)
 
     # 3. Emergency Safety Check: scan current message and all user history
     history = mem.get_history(session_id)
@@ -151,6 +160,8 @@ def handle_chat_message(
         existing_facts=facts_dict,
         current_message=text,
         language=language,
+        image_base64=image_base64,
+        image_mime_type=image_mime_type,
     )
 
     # 6. Update structured facts from LLM extraction

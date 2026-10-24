@@ -37,7 +37,8 @@ async def security_headers(request, call_next):
         if len(RATE_BUCKETS)>2048:
             for key in list(RATE_BUCKETS):
                 if not RATE_BUCKETS[key] or RATE_BUCKETS[key][-1]<timestamp-60:RATE_BUCKETS.pop(key,None)
-    if request.headers.get('content-length','0').isdigit() and int(request.headers.get('content-length','0'))>100_000:
+    max_payload = 10_000_000 if request.url.path.startswith('/assistant') else 100_000
+    if request.headers.get('content-length','0').isdigit() and int(request.headers.get('content-length','0'))>max_payload:
         from fastapi.responses import JSONResponse
         return JSONResponse(status_code=413,content={'detail':'Request too large'})
     response = await call_next(request)

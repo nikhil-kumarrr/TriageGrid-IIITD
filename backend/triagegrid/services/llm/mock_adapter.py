@@ -24,6 +24,8 @@ class MockLLMAdapter(LLMAdapter):
         existing_facts: dict[str, Any],
         current_message: str,
         language: str = "English",
+        image_base64: str | None = None,
+        image_mime_type: str | None = None,
     ) -> LLMResponse:
         if self.should_fail:
             raise RuntimeError("Mock provider simulated network timeout / API error")
@@ -35,6 +37,24 @@ class MockLLMAdapter(LLMAdapter):
         facts = dict(existing_facts or {})
         facts.setdefault("symptoms", [])
         facts.setdefault("warning_signs", {})
+        facts.setdefault("uploaded_documents", [])
+        facts.setdefault("family_history", [])
+
+        if image_base64:
+            facts["uploaded_documents"].append({
+                "doc_type": "prescription",
+                "summary": "Verified medical prescription (extracted via OCR)",
+                "date": "2026-10-24"
+            })
+            if "paracetamol 500mg" not in facts.get("allergies_medications", []):
+                facts.setdefault("allergies_medications", []).append("paracetamol 500mg")
+
+        # Check for family history in text
+        if any(w in text for w in ["diabetes", "sugar", "bp", "hypertension", "heart condition"]):
+            if any(w in text for w in ["father", "papa", "dad"]):
+                facts["family_history"].append({"relation": "father", "condition": "hypertension/diabetes", "timeline": "chronic"})
+            elif any(w in text for w in ["mother", "mummy", "mom"]):
+                facts["family_history"].append({"relation": "mother", "condition": "hypertension/diabetes", "timeline": "chronic"})
 
         # Check for emergency signs in mock
         if any(w in text for w in ["chest pain", "seene me dard", "unconscious", "behosh", "bleeding"]):

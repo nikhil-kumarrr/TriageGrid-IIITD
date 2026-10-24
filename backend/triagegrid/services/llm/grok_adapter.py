@@ -27,6 +27,8 @@ class GrokAdapter(LLMAdapter):
         existing_facts: dict[str, Any],
         current_message: str,
         language: str = "English",
+        image_base64: str | None = None,
+        image_mime_type: str | None = None,
     ) -> LLMResponse:
         if not self.is_configured():
             raise RuntimeError("Grok / xAI API key is not configured on the server.")

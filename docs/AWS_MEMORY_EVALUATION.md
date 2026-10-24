@@ -108,3 +108,64 @@ In compliance with project directives:
 - When `MEMORY_PROVIDER=aws` is configured, `DynamoDBMemoryProvider` performs an honest credential check upon initialization.
 - If AWS credentials or region are unconfigured or invalid, the provider fails with a clear, honest error message rather than silently faking an AWS connection.
 - Memory retrieval strictly injects structured context into conversation prompts; it **never** triggers fine-tuning or external model training.
+
+---
+
+## 5. Multimodal Document & Bill Storage Architecture
+
+When users upload doctor prescriptions, hospital bills, discharge cards, or lab reports:
+
+```
+[ User App / Mobile UI ]
+          │ (1) Base64 / Multipart Image Upload
+          ▼
+[ FastAPI Backend / /assistant/chat ]
+          ├─► (2) Multimodal OCR Extraction (Gemini 3.5 Flash-Lite / Grok Vision)
+          │       └─► Extracted: Prescriptions, Doctor Notes, Dosages, Diagnostic tests
+          ├─► (3) Medical Artifact Ingestion to Amazon S3 (Encrypted at rest with KMS)
+          │       └─► `s3://triagegrid-patient-records/<session_id>/docs/<doc_id>.jpg`
+          └─► (4) Longitudinal Metadata & Extracted Facts to DynamoDB / MemoryDB
+                  └─► Stored in `uploaded_documents` & `allergies_medications`
+```
+
+### Amazon MemoryDB vs Amazon DynamoDB for Healthcare Sessions:
+- **Amazon DynamoDB**: Ideal for durable, low-cost document metadata, longitudinal family history, and TTL session expiration.
+- **Amazon MemoryDB for Redis**: Ultra-low latency (<1ms) in-memory cache for high-throughput live multi-turn clinical chat state if scaling to thousands of concurrent users.
+- **Amazon S3**: Compliant object storage for original medical imaging and bill scans with S3 Object Lock and lifecycle rules.
+
+---
+
+## 6. How Accuracy Is Enhanced: Grounding (RAG) vs Weight Training
+
+In modern clinical AI systems, personal patient data must **never** be used to retrain or fine-tune foundational model weights due to HIPAA/DPDP data privacy regulations and model degradation risks.
+
+Instead, accuracy and personalization are achieved through **Longitudinal Structured Grounding (In-Context RAG)**:
+1. **Longitudinal History Extraction**:
+   When the user explains family conditions (e.g. *"mere papa ko 10 saal se high BP aur diabetes hai"*), the assistant extracts this into structured facts:
+   `{"relation": "father", "condition": "hypertension & diabetes", "timeline": "10 years"}`.
+2. **Contextual Grounding**:
+   On every subsequent message and future visit, DynamoDB supplies this verified clinical profile into the LLM system context.
+3. **Clinical Reasoning**:
+   When the user reports new symptoms (e.g. chest discomfort, dizziness, or leg swelling), the AI immediately factors in the father's 10-year hypertensive history and past prescriptions to adjust risk thresholds, ask targeted follow-up questions, and guide them to the right specialist.
+
+---
+
+## 7. Connecting Your AWS Account to TriageGrid
+
+To activate AWS DynamoDB memory in your local or hosted TriageGrid environment:
+
+1. **Create an AWS IAM User / Role** with the policy shown in Section 3.3.
+2. **Create the DynamoDB Table**:
+   - Table Name: `triagegrid_memory`
+   - Partition Key: `session_id` (String)
+   - Sort Key: `sk` (String)
+3. **Configure your `.env`**:
+   ```bash
+   MEMORY_PROVIDER=aws
+   AWS_REGION=ap-south-1
+   AWS_DYNAMODB_TABLE=triagegrid_memory
+   AWS_ACCESS_KEY_ID=your_access_key_here
+   AWS_SECRET_ACCESS_KEY=your_secret_key_here
+   ```
+4. **Restart Backend**:
+   The backend will automatically initialize `AWSMemoryProvider` and persist all chat turns, family histories, and uploaded document facts to DynamoDB.

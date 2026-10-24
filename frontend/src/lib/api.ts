@@ -25,6 +25,8 @@ export type StructuredFacts={
   warning_signs:Record<string,string>;
   existing_conditions:string[];
   allergies_medications:string[];
+  family_history?:{relation:string;condition:string;duration?:string}[];
+  uploaded_documents?:{doc_type:string;summary:string;date?:string;provider?:string}[];
   care_preference:string;
   uncertainties:string[];
   updated_at?:string;
@@ -41,6 +43,8 @@ export type AssistantMessage={
     follow_up_question?:string|null;
     chips?:string[];
     care_pathway_hint?:string|null;
+    has_image?:boolean;
+    mime?:string;
     next_action?:{
       type:string;
       label:string;
@@ -81,6 +85,6 @@ export type AssistantConversation={
 
 export const assistantStatus=()=>api<AssistantStatus>('/assistant/status');
 export const assistantConversation=()=>api<AssistantConversation>('/assistant/conversation');
-export const assistantChat=(body:{message:string;language?:string;location?:{lat:number;lng:number}|null})=>api<AssistantChatResponse>('/assistant/chat',body);
+export const assistantChat=(body:{message:string;language?:string;location?:{lat:number;lng:number}|null;image_base64?:string|null;image_mime_type?:string|null})=>api<AssistantChatResponse>('/assistant/chat',body);
 export const assistantCorrectFacts=(facts:StructuredFacts)=>api<{updated:boolean;structured_facts:StructuredFacts}>('/assistant/facts/correct',{facts});
 export const assistantClear=()=>api<{cleared:boolean}>('/assistant/conversation',undefined,'DELETE');

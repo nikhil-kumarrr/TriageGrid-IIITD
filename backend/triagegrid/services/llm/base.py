@@ -30,8 +30,10 @@ class LLMAdapter(ABC):
         existing_facts: dict[str, Any],
         current_message: str,
         language: str = "English",
+        image_base64: str | None = None,
+        image_mime_type: str | None = None,
     ) -> LLMResponse:
-        """Generate an assistant response, extract facts, and determine clarification or care path."""
+        """Generate an assistant response, extract facts, analyze documents/images, and determine clarification or care path."""
         pass
 
     @abstractmethod
