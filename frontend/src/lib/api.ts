@@ -64,6 +64,7 @@ export type AssistantStatus={
 
 export type AssistantChatResponse={
   message:string;
+  language?:string;
   follow_up_question:string|null;
   structured_facts:StructuredFacts;
   care_recommendation:(Result&{request_id:string})|null;

@@ -11,12 +11,31 @@ from ..storage import connect, uid, now
 from ..config import settings
 
 def detect_language(text: str, default: str = "English") -> str:
+    """Detect clear language changes; keep context for short/ambiguous replies."""
     import re
+    explicit = re.search(r"(?:reply|answer|respond|bolo|jawab).*?\b(english|hinglish|hindi)\b", text, re.I)
+    if explicit:
+        return {"english": "English", "hinglish": "Hinglish", "hindi": "Hindi"}[explicit.group(1).lower()]
     if re.search(r'[\u0900-\u097f]', text):
         return "Hindi"
-    if re.search(r'\b(hai|ko|ghar|chahiye|mummy|papa|nahi|dard|bukhar)\b', text, re.I):
+    if re.search(r'\b(mujhe|mujko|mere|meri|mera|hum|aap|hai|hain|ho|raha|rahi|din|se|ko|ghar|chahiye|mummy|papa|nahi|nahin|haan|dard|bukhar|khansi|saans|pet|batao|kya|kaise|kitne)\b', text, re.I):
         return "Hinglish"
-    return default
+    if re.search(r"\b(i|my|have|having|feel|feeling|since|please|mother|father|need|started|days|pain|fever|cough)\b", text, re.I):
+        return "English"
+    return default if default in ("English", "Hindi", "Hinglish") else "English"
+
+
+def merge_facts(previous: dict, extracted: dict) -> dict:
+    """Keep known facts when a later extraction omits them; explicit corrections win."""
+    merged = dict(previous)
+    for key, value in extracted.items():
+        if key == "warning_signs" and isinstance(value, dict):
+            signs = dict(previous.get(key, {}))
+            signs.update({k: v for k, v in value.items() if v in ("confirmed", "denied") or k not in signs})
+            merged[key] = signs
+        elif value is not None and value != "unspecified":
+            merged[key] = value
+    return merged
 
 def get_assistant_status() -> dict[str, Any]:
     adapter = get_llm_adapter()
@@ -52,9 +71,11 @@ def handle_chat_message(
     mem = get_memory_provider()
     adapter = custom_adapter or get_llm_adapter()
 
-    # 1. Resolve language
-    if language == "auto" or not language:
-        language = detect_language(text)
+    # User wording takes priority over UI language; short answers inherit the chat.
+    prior_history = mem.get_history(session_id)
+    previous_language = next((m.metadata.get("language") for m in reversed(prior_history)
+                              if m.metadata.get("language") in ("English", "Hindi", "Hinglish")), None)
+    language = detect_language(text, previous_language or language)
 
     # 2. Add user message to session memory
     user_meta = {"language": language}
@@ -117,6 +138,7 @@ def handle_chat_message(
             em_msg,
             {
                 "is_emergency": True,
+                "language": language,
                 "red_flags": unique_flags,
                 "request_id": rid,
             },
@@ -124,6 +146,7 @@ def handle_chat_message(
 
         return {
             "message": em_msg,
+            "language": language,
             "follow_up_question": None,
             "structured_facts": existing_facts.to_dict(),
             "care_recommendation": {
@@ -152,7 +175,13 @@ def handle_chat_message(
         )
 
     # 5. Invoke LLM Adapter with conversation context
-    messages_payload = [{"role": m.role, "text": m.text} for m in history]
+    messages_payload = []
+    for m in history[:-1]:
+        content = m.text
+        question = m.metadata.get("follow_up_question") if m.role == "assistant" else None
+        if question and question.casefold() not in content.casefold():
+            content += "\n" + question
+        messages_payload.append({"role": m.role, "text": content})
     facts_dict = existing_facts.to_dict()
 
     llm_resp: LLMResponse = adapter.generate(
@@ -165,7 +194,7 @@ def handle_chat_message(
     )
 
     # 6. Update structured facts from LLM extraction
-    updated_facts = StructuredFacts.from_dict({**facts_dict, **llm_resp.structured_facts})
+    updated_facts = StructuredFacts.from_dict(merge_facts(facts_dict, llm_resp.structured_facts))
     updated_facts.source_message_id = user_msg.id
     mem.update_facts(session_id, updated_facts)
 
@@ -224,6 +253,8 @@ def handle_chat_message(
         llm_resp.message,
         {
             "follow_up_question": llm_resp.follow_up_question,
+            "language": language,
+            "is_emergency": bool(care_recommendation and care_recommendation.get("care_type") == "emergency_112"),
             "chips": llm_resp.suggested_chips,
             "care_pathway_hint": llm_resp.care_pathway_hint,
             "next_action": next_action,
@@ -232,6 +263,7 @@ def handle_chat_message(
 
     return {
         "message": llm_resp.message,
+        "language": language,
         "follow_up_question": llm_resp.follow_up_question,
         "structured_facts": updated_facts.to_dict(),
         "care_recommendation": care_recommendation,

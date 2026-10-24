@@ -64,3 +64,5 @@
 .removePreviewBtn:hover{background:#e2ecf9;color:#2b4d79}
 .historyChip{display:inline-block;background:#f3edff;color:#6933bb;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;margin:2px 4px 2px 0}
 .docChip{display:inline-flex;align-items:center;gap:4px;background:#eef5fc;color:#2c68b8;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;margin:2px 4px 2px 0}
+
+.chatFollowUp{font-weight:600;color:#233f64;margin-top:10px!important;line-height:1.65}
