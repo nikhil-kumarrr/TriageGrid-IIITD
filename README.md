@@ -74,6 +74,78 @@ The CSV script and API call the same `predict()` function. CSV input needs `user
 - `reports/`: evaluation scope and live integration evidence, excluding credentials.
 - Original Stitch exports and `triage_app/triage_app/`: preserved references. The old Streamlit app is not part of the new runtime.
 
+### Relational Schema & Data Flow
+
+```text
+       ┌────────────────────────┐                    ┌─────────────────────────┐
+       │        PATIENTS        │                    │      CARE_TAXONOMY      │
+       ├────────────────────────┤                    ├─────────────────────────┤
+       │ PK  patient_id         │                    │ PK  care_type_code      │
+       │     full_name          │                    │     display_name        │
+       │     phone_number       │                    │     default_urgency     │
+       │     lat                │                    │     red_flag_triggers   │
+       │     lng                │                    │     min_qualification   │
+       │     pref_language      │                    └────────────┬────────────┘
+       └───────────┬────────────┘                                 │
+                   │ 1                                            │ 1
+                   │                                              │
+                   │ N                                            │ N
+       ┌───────────┴────────────┐                    ┌────────────┴────────────┐
+       │    INTAKE_SESSIONS     │ 1                1 │     TRIAGE_RECORDS      │
+       ├────────────────────────┼────────────────────┼─────────────────────────┤
+       │ PK  session_id         │                    │ PK  triage_id           │
+       │ FK  patient_id         │                    │ FK  session_id          │
+       │     input_type (v/txt) │                    │ FK  care_type_code      │
+       │     raw_utterance      │                    │     urgency (rt/sd/imm) │
+       │     symptom_slots      │                    │     is_red_flag (bool)  │
+       │     turns_count        │                    │     clinical_reasoning  │
+       │     created_at         │                    │     eval_confidence     │
+       └────────────────────────┘                    └──────┬────────────┬─────┘
+                                                            │ 1          │ 1
+                                       ┌────────────────────┘            │
+                                       │ 1                               │ N
+                                       ▼                                 ▼
+       ┌────────────────────────────────────────────────┐   ┌───────────────────────────┐
+       │             TINYFISH_AGENT_RUNS                │   │     MATCHING_RECORDS      │
+       ├────────────────────────────────────────────────┤   ├───────────────────────────┤
+       │ PK  run_id (TinyFish UUID)                     │   │ PK  match_id              │
+       │ FK  triage_id                                  │   │ FK  triage_id             │
+       │     trigger_type (emergency_er / verification) │   │ FK  caregiver_id          │
+       │     target_url (e.g., Delhi ER portal)         │   │     match_score (0.00-1.0)│
+       │     streaming_url                              │   │     rank_order            │
+       │     agent_status (RUNNING / COMPLETED / FAILED)│   │     distance_km           │
+       │     extracted_payload (JSON)                   │   │     justification_reason  │
+       │     num_steps                                  │   │     booking_confirmed     │
+       └────────────────────────────────────────────────┘   └─────────────▲─────────────┘
+                                                                          │ N
+                                                                          │
+                                                                          │ 1
+                                                            ┌─────────────┴─────────────┐
+                                                            │        CAREGIVERS         │
+                                                            ├───────────────────────────┤
+                                                            │ PK  caregiver_id          │
+                                                            │     full_name             │
+                                                            │     role (paramedic/nurse)│
+                                                            │     lat                   │
+                                                            │     lng                   │
+                                                            │     languages (JSON array)│
+                                                            │     rating                │
+                                                            │     is_active             │
+                                                            └─────────────┬─────────────┘
+                                                                          │ 1
+                                                                          │
+                                                                          │ N
+                                                            ┌─────────────┴─────────────┐
+                                                            │    AVAILABILITY_SLOTS     │
+                                                            ├───────────────────────────┤
+                                                            │ PK  slot_id               │
+                                                            │ FK  caregiver_id          │
+                                                            │     start_time            │
+                                                            │     end_time              │
+                                                            │     is_booked             │
+                                                            └───────────────────────────┘
+```
+
 ## Deployment
 
 `docker compose up --build` builds Python + Nginx frontend, proxies `/api` and persists SQLite through a named volume. Local ports are bound to loopback. Docker execution is not yet verified on this machine because Docker is unavailable.
@@ -82,7 +154,7 @@ This build is intended for local synthetic-data demonstration with one API worke
 
 ## Evaluation and limitations
 
-51 automated tests currently cover contracts, safety examples, supplied multi-turn conversations, data parity, booking ownership, cancellation, concurrent slot conflicts, handover consent, AI assistant multi-turn facts extraction, emergency escalation midway, facts correction, session isolation, provider failure recovery, booking handoff, and mocked TinyFish outcomes. Use the latest test output as authoritative if the suite changes.
+52 automated tests currently cover contracts, safety examples, supplied multi-turn conversations, data parity, booking ownership, cancellation, concurrent slot conflicts, handover consent, AI assistant multi-turn facts extraction, multimodal image and prescription OCR analysis, emergency escalation midway, facts correction, session isolation, provider failure recovery, booking handoff, and mocked TinyFish outcomes. Use the latest test output as authoritative if the suite changes.
 
 Baseline grouped model-selection macro-F1: care type 0.6466; urgency 0.6116. These are not independent clinical validation. Lexical rules have limited language/context coverage. Some source emergency annotations are inconsistent. A successful TinyFish run returned published AIIMS information; that is not verification of bed status or real-time emergency capacity. Speech depends on browser/platform and may use remote recognition. Audio is not stored by this app.
 
