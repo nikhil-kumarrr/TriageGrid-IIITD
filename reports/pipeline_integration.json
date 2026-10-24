@@ -1,0 +1,2391 @@
+{
+  "scope": "In-sample integration audit; training rows, NOT held-out accuracy or clinical validation",
+  "requests": 340,
+  "p50_ms": 1.1155834945384413,
+  "p95_ms": 1.2930420052725822,
+  "care_agreement": 1.0,
+  "urgency_agreement": 1.0,
+  "schema_failures": 0,
+  "rows": [
+    {
+      "id": "S0001",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0002",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0003",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0004",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0005",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0006",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0007",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0008",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0009",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0010",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0011",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0012",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0013",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0014",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0015",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0016",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0017",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0018",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0019",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0020",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0021",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0022",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0023",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0024",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0025",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0026",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0027",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0028",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0029",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0030",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0031",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0032",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0033",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0034",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0035",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0036",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0037",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0038",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0039",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0040",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0041",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0042",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0043",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0044",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0045",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0046",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0047",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0048",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0049",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0050",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0051",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0052",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0053",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0054",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0055",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0056",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0057",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0058",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0059",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0060",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0061",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0062",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0063",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0064",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0065",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0066",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0067",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0068",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0069",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0070",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0071",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0072",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0073",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0074",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0075",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0076",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0077",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0078",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0079",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0080",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0081",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0082",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0083",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0084",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0085",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0086",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0087",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0088",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0089",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0090",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0091",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0092",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0093",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0094",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0095",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0096",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0097",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0098",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0099",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0100",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0101",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0102",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0103",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0104",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0105",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0106",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0107",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0108",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0109",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0110",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0111",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0112",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0113",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0114",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0115",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0116",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0117",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0118",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0119",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0120",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0121",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0122",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0123",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0124",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0125",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0126",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0127",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0128",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0129",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0130",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0131",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0132",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0133",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0134",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0135",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0136",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0137",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0138",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0139",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0140",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0141",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0142",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0143",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0144",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0145",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0146",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0147",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0148",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0149",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0150",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0151",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0152",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0153",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0154",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0155",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0156",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0157",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0158",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0159",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0160",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0161",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0162",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0163",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0164",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0165",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0166",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0167",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0168",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0169",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0170",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0171",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0172",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0173",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0174",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0175",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0176",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0177",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0178",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0179",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0180",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0181",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0182",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0183",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0184",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0185",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0186",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0187",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0188",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0189",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0190",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0191",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0192",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0193",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0194",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0195",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0196",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0197",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0198",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0199",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0200",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0201",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0202",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0203",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0204",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0205",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0206",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0207",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0208",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0209",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0210",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0211",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0212",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0213",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0214",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0215",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0216",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0217",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0218",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0219",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0220",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0221",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0222",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0223",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0224",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0225",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0226",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0227",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0228",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0229",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0230",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0231",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0232",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0233",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0234",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0235",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0236",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0237",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0238",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0239",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0240",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0241",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0242",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0243",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0244",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0245",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0246",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0247",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0248",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0249",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0250",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0251",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0252",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0253",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0254",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0255",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0256",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0257",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0258",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0259",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0260",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0261",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0262",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0263",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0264",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0265",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0266",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0267",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0268",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0269",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0270",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0271",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0272",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0273",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0274",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0275",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0276",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0277",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0278",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0279",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0280",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0281",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0282",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0283",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0284",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0285",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0286",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0287",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0288",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0289",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0290",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0291",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0292",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0293",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0294",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0295",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0296",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0297",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0298",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0299",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0300",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0301",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0302",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0303",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0304",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0305",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0306",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0307",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0308",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0309",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0310",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0311",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0312",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0313",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0314",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0315",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0316",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0317",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0318",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0319",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0320",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0321",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0322",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0323",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0324",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0325",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0326",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0327",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0328",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0329",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0330",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0331",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0332",
+      "care_type": "teleconsultation",
+      "urgency": "same_day",
+      "reference_care_type": "teleconsultation",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0333",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0334",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0335",
+      "care_type": null,
+      "urgency": null,
+      "reference_care_type": null,
+      "reference_urgency": null
+    },
+    {
+      "id": "S0336",
+      "care_type": "paramedic_home_visit",
+      "urgency": "same_day",
+      "reference_care_type": "paramedic_home_visit",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0337",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    },
+    {
+      "id": "S0338",
+      "care_type": "lab_test_home",
+      "urgency": "scheduled",
+      "reference_care_type": "lab_test_home",
+      "reference_urgency": "scheduled"
+    },
+    {
+      "id": "S0339",
+      "care_type": "home_nursing",
+      "urgency": "same_day",
+      "reference_care_type": "home_nursing",
+      "reference_urgency": "same_day"
+    },
+    {
+      "id": "S0340",
+      "care_type": "emergency_112",
+      "urgency": "emergency",
+      "reference_care_type": "emergency_112",
+      "reference_urgency": "emergency"
+    }
+  ]
+}

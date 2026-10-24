@@ -1,0 +1,30 @@
+{
+  "status": "found",
+  "result": {
+    "contact": "+91-11-26588500 / +91-11-26588700 (Board Number); Fax: +91-11-26588663 / +91-11-26588641",
+    "address": "All India Institute of Medical Sciences, Ansari Nagar, New Delhi - 110029",
+    "services": [
+      "National Poison Information Centre 24x7",
+      "De-addiction Centre",
+      "Institute Rotary Centre Hospital",
+      "Cardiothoracic Centre",
+      "Neurosciences Centre",
+      "Dr. Rajendra Prasad Centre for Ophthalmic Sciences",
+      "Cardiac catheterization",
+      "Heart valve surgery",
+      "Coronary bypass surgery",
+      "Heart transplant"
+    ],
+    "evidence": [
+      "\"All India Institute of Medical Sciences, Ansari Nagar, New Delhi - 110029. Board Number: +91-11-26588500 / 26588700; Fax: +91-11-26588663 / 26588641.\" - From About Us page",
+      "\"The page mentions a 'National Poison Information Centre 24x7' and a 'De-addiction Centre'.\" - From Patient Care page",
+      "\"It highlights the institute's commitment to providing world-class clinical care to underprivileged citizens, its conglomerate of specialized facilities (including the Dr. Rajendra Prasad Centre for Ophthalmic Sciences, Cardiothoracic Centre, Neurosciences Centre, and more).\" - From Patient Care page",
+      "\"Burn cases, dog-bite cases, and patients suffering from infectious diseases are not entertained in the AIIMS Hospital.\" - From About Us page",
+      "\"Board Number : +91-11-26588500 / 26588700; Fax : +91-11-26588663 / 26588641.\" - From Patient Care page"
+    ],
+    "source_url": "https://www.aiims.edu/",
+    "hospital_name": "AIIMS New Delhi",
+    "checked_at": "2026-10-24T12:15:26.635310+00:00",
+    "disclaimer": "Extracted published information; not bed availability, dispatch or independently verified contact status."
+  }
+}

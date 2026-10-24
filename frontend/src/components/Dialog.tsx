@@ -1,0 +1,7 @@
+import {useEffect,useRef,ReactNode} from 'react';
+import {X} from 'lucide-react';
+export default function Dialog({title,onClose,children}:{title:string;onClose:()=>void;children:ReactNode}){
+ const ref=useRef<HTMLDivElement>(null);
+ useEffect(()=>{const before=document.activeElement as HTMLElement;const previous=document.body.style.overflow;document.body.style.overflow='hidden';ref.current?.focus();function key(e:KeyboardEvent){if(e.key==='Escape'){e.preventDefault();onClose();}if(e.key==='Tab'){const list=ref.current?.querySelectorAll<HTMLElement>('button:not(:disabled),a[href],input:not(:disabled),select,textarea,[tabindex="0"]');if(!list?.length){e.preventDefault();return;}const first=list[0],last=list[list.length-1];if(e.shiftKey&&(document.activeElement===first||document.activeElement===ref.current)){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}}document.addEventListener('keydown',key);return()=>{document.removeEventListener('keydown',key);document.body.style.overflow=previous;before?.focus();};},[onClose]);
+ return <div className="overlay" onClick={onClose}><div className="dialog" ref={ref} role="dialog" aria-modal="true" aria-label={title} tabIndex={-1} onClick={e=>e.stopPropagation()}><div className="dialogtop"><h2>{title}</h2><button className="icon" aria-label="Close" onClick={onClose}><X/></button></div>{children}</div></div>;
+}

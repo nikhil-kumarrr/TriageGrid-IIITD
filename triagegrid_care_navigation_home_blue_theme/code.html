@@ -1,0 +1,606 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<title>TriageGrid - Smart Care Navigation</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Font: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            triage: {
+              bluePrimary: '#4D82F7',
+              blueGradientStart: '#4C83F8',
+              blueGradientEnd: '#6FA4FE',
+              softBg: '#F3F7FE',
+              cardBg: '#FFFFFF',
+              pillBlue: '#EAF1FF',
+              textPrimary: '#1E293B',
+              textSecondary: '#64748B',
+              badgeGreen: '#34D399',
+              badgePurple: '#A855F7',
+            }
+          },
+          boxShadow: {
+            'soft-card': '0 12px 32px -4px rgba(77, 130, 247, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04)',
+            'nav-bar': '0 -4px 25px rgba(50, 80, 150, 0.08)',
+            'btn-glow': '0 10px 22px -3px rgba(77, 130, 247, 0.45)',
+            'mic-glow': '0 10px 25px -4px rgba(77, 130, 247, 0.38)',
+            'clay-button': 'inset 0 2px 4px rgba(255, 255, 255, 0.8), 0 8px 18px rgba(77, 130, 247, 0.18)',
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Base Styling -->
+<style data-purpose="base-layout">
+    body {
+      background-color: #E6EEFA;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Hide native scrollbars for horizontal overflows while keeping smooth scrolling */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style data-purpose="card-decorations">
+    .soft-pill-inset {
+      background: linear-gradient(180deg, #F9FBFF 0%, #EEF4FD 100%);
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.9), inset 0 -2px 4px rgba(180, 205, 245, 0.3);
+    }
+    .action-clay-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 10px 20px rgba(26, 68, 160, 0.15), inset 0 1px 2px rgba(255,255,255,0.7);
+    }
+  </style>
+<!-- END: Base Styling -->
+</head>
+<body class="flex justify-center items-start min-h-screen sm:py-6">
+<!-- Mobile Viewport Container (iOS Simulation) -->
+<div class="w-full max-w-[414px] bg-[#F4F8FD] min-h-screen sm:min-h-[896px] sm:rounded-[44px] shadow-2xl relative overflow-hidden flex flex-col justify-between border-slate-200 sm:border" data-purpose="ios-device-container">
+<!-- BEGIN: Top Blue Header Section -->
+<header class="bg-gradient-to-b from-[#4F84F8] via-[#5C90FA] to-[#6FA4FE] pt-3 pb-10 px-5 text-white relative" data-purpose="top-blue-container"><!-- iOS Status Bar Mockup -->
+<div class="flex justify-between items-center text-xs font-semibold text-white/90 mb-3 px-1" data-purpose="status-bar">
+  <span class="">9:41</span>
+  <div class="flex items-center space-x-1.5">
+    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z" opacity="0.3"></path><path d="M12 6a6 6 0 0 0-6 6c0 1.48.54 2.84 1.44 3.91L12 19l4.56-3.09A5.96 5.96 0 0 0 18 12a6 6 0 0 0-6-6z"></path></svg>
+    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A17.88 17.88 0 0 0 12 4z"></path></svg>
+    <div class="w-5 h-2.5 border border-white/80 rounded-sm p-0.5 flex items-center">
+      <div class="w-full h-full bg-white rounded-2xs"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation Bar: Logo, Brand title, Demo Badge, Language, Settings -->
+<div class="flex justify-between items-center gap-2 mb-4" data-purpose="user-greeting-bar">
+  <div class="flex items-center space-x-2 min-w-0">
+    <div class="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner shrink-0" aria-hidden="true">
+      <span class="material-symbols-outlined text-white text-xl">grid_view</span>
+    </div>
+    <div class="min-w-0">
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <h1 class="text-lg font-bold tracking-tight text-white leading-none shrink-0">TriageGrid</h1>
+        <span class="text-[9px] font-bold uppercase tracking-wider bg-white/25 px-1.5 py-0.5 rounded text-white border border-white/30 shrink-0">Synthetic demo</span>
+      </div>
+      <p class="text-[11px] font-medium text-blue-100 mt-0.5 truncate">Care Navigation</p>
+    </div>
+  </div>
+
+  <!-- Actions: Language switch + Settings Gear -->
+  <div class="flex items-center space-x-1.5 shrink-0">
+    <button id="langToggleBtn" type="button" onclick="toggleLanguage()" class="h-10 px-2.5 rounded-xl bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/30 text-white text-xs font-bold flex items-center gap-1 min-w-[48px] justify-center transition-all shrink-0" aria-label="Switch language: English, Hindi, Hinglish">
+      <span class="material-symbols-outlined text-sm">language</span>
+      <span id="currentLangText" class="">EN</span>
+    </button>
+    <button id="openSettingsBtn" type="button" onclick="openSettingsModal()" class="w-10 h-10 rounded-xl bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/30 text-white flex items-center justify-center min-w-[48px] min-h-[48px] transition-all shrink-0" aria-label="Settings and preferences">
+      <span class="material-symbols-outlined text-xl">settings</span>
+    </button>
+  </div>
+</div>
+
+<!-- Personal Greeting & Supporting text -->
+<div class="mb-4">
+  <h2 class="text-2xl font-extrabold tracking-tight text-white">How can we help?</h2>
+  <p class="text-blue-100 text-xs mt-0.5 font-medium">Find suitable care for yourself or your family.</p>
+</div>
+
+<!-- Quick Service Shortcuts (4 Frosted Clay Style Buttons with compliant labels) -->
+<div class="grid grid-cols-4 gap-2 pt-1 pb-1" data-purpose="quick-service-shortcuts">
+  <button type="button" onclick="prefillShortcut('Home Assessment')" class="action-clay-card rounded-2xl p-2 flex flex-col items-center justify-center text-center transition-transform active:scale-95 group min-h-[72px]" aria-label="Request Home Assessment">
+    <div class="w-9 h-9 rounded-xl bg-white/90 shadow-sm flex items-center justify-center mb-1 text-rose-500 group-hover:scale-105 transition-transform">
+      <span class="material-symbols-outlined text-xl">medical_services</span>
+    </div>
+    <span class="text-[10px] font-semibold text-white tracking-tight leading-tight">Home Assessment</span>
+  </button>
+
+  <button type="button" onclick="prefillShortcut('Nursing Care')" class="action-clay-card rounded-2xl p-2 flex flex-col items-center justify-center text-center transition-transform active:scale-95 group min-h-[72px]" aria-label="Request Nursing Care">
+    <div class="w-9 h-9 rounded-xl bg-white/90 shadow-sm flex items-center justify-center mb-1 text-blue-500 group-hover:scale-105 transition-transform">
+      <span class="material-symbols-outlined text-xl">health_and_safety</span>
+    </div>
+    <span class="text-[10px] font-semibold text-white tracking-tight leading-tight">Nursing Care</span>
+  </button>
+
+  <button type="button" onclick="prefillShortcut('Lab Collection')" class="action-clay-card rounded-2xl p-2 flex flex-col items-center justify-center text-center transition-transform active:scale-95 group min-h-[72px]" aria-label="Request Lab Collection">
+    <div class="w-9 h-9 rounded-xl bg-white/90 shadow-sm flex items-center justify-center mb-1 text-indigo-500 group-hover:scale-105 transition-transform">
+      <span class="material-symbols-outlined text-xl">science</span>
+    </div>
+    <span class="text-[10px] font-semibold text-white tracking-tight leading-tight">Lab Collection</span>
+  </button>
+
+  <button type="button" onclick="prefillShortcut('Video Consult')" class="action-clay-card rounded-2xl p-2 flex flex-col items-center justify-center text-center transition-transform active:scale-95 group min-h-[72px]" aria-label="Request Video Consult">
+    <div class="w-9 h-9 rounded-xl bg-white/90 shadow-sm flex items-center justify-center mb-1 text-emerald-500 group-hover:scale-105 transition-transform">
+      <span class="material-symbols-outlined text-xl">videocam</span>
+    </div>
+    <span class="text-[10px] font-semibold text-white tracking-tight leading-tight">Video Consult</span>
+  </button>
+</div>
+<p class="text-[10px] text-blue-100/90 text-center mt-2 font-medium">Tapping a shortcut starts Intake with that service intent preselected without bypassing safety triage.</p></header>
+<!-- END: Top Blue Header Section -->
+<!-- BEGIN: Main White Curved Surface -->
+<main class="flex-1 bg-white rounded-t-[34px] -mt-5 pt-5 px-4 shadow-lg z-10 space-y-4 pb-32" data-purpose="care-navigation-surface">
+<!-- Emergency Bypass Banner -->
+<section class="bg-rose-50 border border-rose-200/80 rounded-2xl p-3 flex items-center justify-between shadow-xs" data-purpose="emergency-protocol-banner"><div class="flex items-center space-x-2.5">
+  <div class="w-8 h-8 rounded-full bg-rose-500 flex items-center justify-center text-white shrink-0 shadow-sm">
+    <span class="material-symbols-outlined text-lg">warning</span>
+  </div>
+  <div>
+    <div class="flex items-center space-x-1.5">
+      <span class="text-xs font-bold text-rose-800">Need emergency help?</span>
+      <span class="text-[9px] font-semibold px-1.5 py-0.2 bg-rose-200 text-rose-800 rounded-full">Demo</span>
+    </div>
+    <p class="text-[11px] text-rose-600 font-medium">Open the emergency-help demo. (Does not place a real phone call)</p>
+  </div>
+</div>
+<button type="button" onclick="openEmergencyDemo()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs px-3 py-2 rounded-xl shadow-sm inline-flex items-center gap-1 active:scale-95 transition-transform shrink-0 min-h-[44px]" aria-label="Open emergency-help demo">
+  <span class="">Emergency help</span>
+</button></section>
+<!-- BEGIN: Primary AI Voice & Text Intake Hero -->
+<section class="bg-gradient-to-b from-[#F9FBFF] to-[#F1F6FE] rounded-3xl p-4 border border-[#E1ECFB] shadow-soft-card" data-purpose="primary-intake-card"><!-- Header & Step Indicator -->
+<div class="flex items-center justify-between mb-2">
+  <div class="flex items-center space-x-1.5">
+    <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-100/70 px-2 py-0.5 rounded-full">Intelligent Triage</span>
+  </div>
+  <div class="text-[10px] font-bold text-slate-500 bg-white border border-slate-200/80 px-2.5 py-1 rounded-full shadow-2xs">
+    <span class="text-blue-600">Describe</span> → <span class="text-slate-500">Clarify</span> → <span class="text-slate-500">Find care</span>
+  </div>
+</div>
+
+<h3 class="text-base font-bold text-slate-800 mb-0.5">Describe your concern or care need</h3>
+<p class="text-xs text-slate-500 mb-3 font-medium">Speak or type in Hindi, Hinglish or English.</p>
+
+<!-- Simulated Voice Interaction Box -->
+<div id="voiceSection" class="my-2.5 p-3.5 bg-white rounded-2xl border border-blue-100 shadow-inner text-center relative">
+  <!-- State: Idle -->
+  <div id="voiceStateIdle" class="flex flex-col items-center justify-center">
+    <button id="micBtn" type="button" onclick="startVoiceSimulation()" aria-label="Tap to speak with synthetic triage assistant" class="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 text-white flex items-center justify-center shadow-mic-glow active:scale-90 transition-transform mb-2 min-h-[48px] min-w-[48px]">
+      <span class="material-symbols-outlined text-2xl">mic</span>
+    </button>
+    <span class="text-xs font-semibold text-slate-700">Tap to speak</span>
+    <p class="text-[10px] text-blue-600 mt-0.5 font-medium">Microphone audio will be transcribed for demo care routing only.</p>
+  </div>
+
+  <!-- State: Listening (Hidden by default) -->
+  <div id="voiceStateListening" class="hidden flex-col items-center justify-center py-1">
+    <div class="relative mb-2">
+      <span class="w-14 h-14 rounded-full bg-rose-500 text-white flex items-center justify-center animate-pulse">
+        <span class="material-symbols-outlined text-2xl">graphic_eq</span>
+      </span>
+    </div>
+    <span class="text-xs font-bold text-rose-600">Listening... Speak now</span>
+    <div class="flex gap-2 mt-2">
+      <button type="button" onclick="stopVoiceSimulation()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-semibold">Done Speaking</button>
+      <button type="button" onclick="triggerVoiceFallback()" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 px-2 py-1.5 rounded-lg font-medium">Simulate Mic Error</button>
+    </div>
+  </div>
+
+  <!-- State: Transcribing (Hidden by default) -->
+  <div id="voiceStateTranscribing" class="hidden flex-col items-center justify-center py-3">
+    <span class="material-symbols-outlined animate-spin text-blue-600 text-2xl mb-1">progress_activity</span>
+    <span class="text-xs font-semibold text-slate-700">Transcribing speech to text...</span>
+  </div>
+
+  <!-- State: Error / Fallback (Hidden by default) -->
+  <div id="voiceStateError" class="hidden p-2 text-left bg-rose-50 border border-rose-200 rounded-xl mb-1">
+    <div class="flex items-center gap-1.5 text-xs font-bold text-rose-700 mb-1">
+      <span class="material-symbols-outlined text-sm">mic_off</span>
+      <span class="">Speech recognition unavailable or permission denied</span>
+    </div>
+    <p class="text-[11px] text-slate-600">Text entry is 100% available below. You can continue by typing your concern directly.</p>
+    <button type="button" onclick="resetVoiceState()" class="mt-2 text-xs text-blue-600 font-semibold underline">Dismiss</button>
+  </div>
+</div>
+
+<!-- Text Input Form -->
+<div class="space-y-2.5">
+  <div>
+    <label for="concernInput" class="block text-xs font-semibold text-slate-700 mb-1">Or type your concern</label>
+    <input id="concernInput" class="w-full text-xs rounded-xl border-slate-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 py-2.5 px-3 bg-white shadow-2xs placeholder-slate-400" placeholder="Example: Mummy ko 2 din se bukhar hai." type="text">
+  </div>
+
+  <!-- Primary CTA Button with loading and duplicate guard -->
+  <button id="submitCareBtn" onclick="handleCareSubmit()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs tracking-wide shadow-btn-glow flex items-center justify-center space-x-2 active:scale-98 transition-transform min-h-[48px]" type="button">
+    <span id="submitBtnText" class="">Start care request</span>
+    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+  </button>
+
+  <!-- Secondary Fictional Example Link (opens Sheet) -->
+  <div class="text-center pt-1">
+    <button onclick="openScenarioModal()" class="text-xs font-semibold text-blue-600 hover:text-blue-800 underline decoration-blue-300 min-h-[40px] inline-flex items-center justify-center gap-1" type="button">
+      <span class="">⚡ Try a fictional example (6 scenarios)</span>
+    </button>
+  </div>
+
+  <!-- Disclaimer note -->
+  <p class="text-[10px] text-slate-400 text-center font-medium">Use fictional scenarios only. No real patient information.</p>
+</div></section>
+<!-- END: Primary AI Voice & Text Intake Hero -->
+<!-- BEGIN: Active Request / Upcoming Visits Section -->
+<section class="pt-1" data-purpose="active-visits-section"><div class="flex items-center justify-between mb-2 px-1">
+  <div class="flex items-center gap-2">
+    <h3 class="text-sm font-bold text-slate-800">Your requests &amp; bookings</h3>
+    <button type="button" onclick="toggleBookingView()" id="variantToggleBtn" class="text-[10px] font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-full" aria-label="Toggle between empty and populated demo booking">
+      Show populated sample
+    </button>
+  </div>
+  <button type="button" onclick="navigateToBookings()" class="text-xs font-semibold text-blue-600 hover:underline min-h-[40px] flex items-center">View all</button>
+</div>
+
+<!-- Default Empty State -->
+<div id="bookingEmptyState" class="bg-white rounded-2xl p-6 border border-slate-100 shadow-soft-card text-center">
+  <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-2">
+    <span class="material-symbols-outlined text-2xl">calendar_today</span>
+  </div>
+  <h4 class="text-xs font-bold text-slate-800 mb-0.5">No demo bookings yet</h4>
+  <p class="text-[11px] text-slate-500 mb-3">Requests you start will appear here with synthetic updates.</p>
+  <button type="button" onclick="focusIntake()" class="text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-3.5 py-1.5 rounded-lg transition-all min-h-[40px]">
+    Start a request
+  </button>
+</div>
+
+<!-- Populated Demo Variant (Hidden by default, toggleable via button) -->
+<div id="bookingPopulatedState" class="hidden">
+  <article class="bg-white rounded-2xl p-3.5 border border-slate-100 shadow-soft-card relative overflow-hidden">
+    <!-- Top Row: Slot & Allowed Demo State Pill -->
+    <div class="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
+      <div class="flex items-center space-x-1.5 text-xs text-slate-600 font-medium">
+        <span class="material-symbols-outlined text-sm text-blue-600">schedule</span>
+        <span class="">Today, 2:30 PM - 4:00 PM</span>
+      </div>
+      <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
+        Demo confirmed
+      </span>
+    </div>
+
+    <!-- Care Summary -->
+    <div class="mb-3">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-xs font-bold text-slate-800">Home Assessment by a Medic</h4>
+        <span class="text-[10px] font-semibold text-slate-400">Synthetic intake #TG-104</span>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-0.5">Fever &amp; dehydration scenario</p>
+    </div>
+
+    <!-- Synthetic Caregiver Info -->
+    <div class="flex items-center justify-between pt-1">
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 rounded-xl bg-blue-100 border border-blue-200 overflow-hidden flex items-center justify-center font-bold text-xs text-blue-700">
+          PS
+        </div>
+        <div>
+          <p class="text-xs font-bold text-slate-800 leading-tight">Priya Sharma</p>
+          <p class="text-[10px] text-slate-500 font-medium">Synthetic Roster Paramedic</p>
+        </div>
+      </div>
+      <button type="button" onclick="alert('Opening synthetic booking details.')" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 active:scale-95 transition-all min-h-[40px]">
+        View booking
+      </button>
+    </div>
+  </article>
+</div></section>
+<!-- END: Active Request / Upcoming Visits Section -->
+</main>
+<!-- END: Main White Curved Surface -->
+<!-- BEGIN: Floating Bottom Navigation Bar -->
+<nav class="absolute bottom-3 left-4 right-4 bg-white/95 backdrop-blur-md rounded-3xl px-6 py-2.5 shadow-nav-bar border border-slate-100 flex items-center justify-between z-30" data-purpose="floating-bottom-nav"><!-- Destination 1: Home (Active) -->
+<button type="button" class="flex flex-col items-center justify-center text-blue-600 font-semibold min-w-[56px] min-h-[48px]" aria-label="Home Tab" aria-current="page">
+  <span class="material-symbols-outlined text-2xl">home</span>
+  <span class="text-[10px] mt-0.5 font-bold">Home</span>
+</button>
+
+<!-- Destination 2: Center Elevated Plus Button with visible label 'New Request' -->
+<div class="flex flex-col items-center justify-center -top-3 relative">
+  <button id="navNewRequestBtn" onclick="focusIntake()" aria-label="New Care Request" class="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-600 via-blue-500 to-sky-400 text-white shadow-btn-glow flex items-center justify-center active:scale-95 transition-transform border-4 border-[#F4F8FD] min-h-[48px] min-w-[48px]" type="button">
+    <span class="material-symbols-outlined text-2xl">add</span>
+  </button>
+  <span class="text-[9px] font-bold text-blue-600 mt-0.5 tracking-tight">New Request</span>
+</div>
+
+<!-- Destination 3: Bookings -->
+<button type="button" onclick="navigateToBookings()" class="flex flex-col items-center justify-center text-slate-400 hover:text-slate-600 min-w-[56px] min-h-[48px]" aria-label="Bookings Tab">
+  <span class="material-symbols-outlined text-2xl">calendar_month</span>
+  <span class="text-[10px] mt-0.5 font-medium">Bookings</span>
+</button></nav>
+<!-- END: Floating Bottom Navigation Bar -->
+<!-- iOS Home Indicator Pill -->
+<div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-slate-300 rounded-full z-40 pointer-events-none"></div>
+<!-- BEGIN: Sample Scenarios Modal Sheet -->
+<div id="scenarioModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex flex-col justify-end p-0 transition-opacity" role="dialog" aria-modal="true" aria-labelledby="scenarioSheetTitle">
+  <div class="bg-white rounded-t-3xl p-5 max-h-[85vh] overflow-y-auto space-y-3 shadow-2xl">
+    <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+      <div>
+        <h3 id="scenarioSheetTitle" class="text-sm font-bold text-slate-800">Select a Fictional Demo Scenario</h3>
+        <p class="text-[11px] text-slate-500">Prefills input with synthetic test data.</p>
+      </div>
+      <button type="button" onclick="closeScenarioModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center min-w-[36px] min-h-[36px]" aria-label="Close scenarios sheet">
+        <span class="material-symbols-outlined text-base">close</span>
+      </button>
+    </div>
+
+    <div class="space-y-2 text-left">
+      <!-- 1. Home assessment request -->
+      <button type="button" onclick="applyScenario('Mummy ko 2 din se bukhar aur ulti hai, chalne me kamzori hai.')" class="w-full p-3 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left transition-all">
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-bold text-slate-800">1. Home Assessment Request</span>
+          <span class="text-[9px] uppercase px-1.5 py-0.2 bg-blue-100 text-blue-700 font-semibold rounded">Synthetic demo</span>
+        </div>
+        <p class="text-[11px] text-slate-600">"Mummy ko 2 din se bukhar aur ulti hai, chalne me kamzori hai."</p>
+      </button>
+
+      <!-- 2. Nursing-care request -->
+      <button type="button" onclick="applyScenario('Post-surgery wound dressing and IV injection support needed at home.')" class="w-full p-3 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left transition-all">
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-bold text-slate-800">2. Nursing Care Request</span>
+          <span class="text-[9px] uppercase px-1.5 py-0.2 bg-blue-100 text-blue-700 font-semibold rounded">Synthetic demo</span>
+        </div>
+        <p class="text-[11px] text-slate-600">"Post-surgery wound dressing and IV injection support needed at home."</p>
+      </button>
+
+      <!-- 3. Home lab collection -->
+      <button type="button" onclick="applyScenario('Fasting blood sugar and lipid profile home sample collection tomorrow morning.')" class="w-full p-3 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left transition-all">
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-bold text-slate-800">3. Home Lab Collection</span>
+          <span class="text-[9px] uppercase px-1.5 py-0.2 bg-blue-100 text-blue-700 font-semibold rounded">Synthetic demo</span>
+        </div>
+        <p class="text-[11px] text-slate-600">"Fasting blood sugar and lipid profile home sample collection tomorrow morning."</p>
+      </button>
+
+      <!-- 4. Doctor video consultation -->
+      <button type="button" onclick="applyScenario('Follow-up review for mild skin rash on 6-year-old child with pediatrician.')" class="w-full p-3 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left transition-all">
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-bold text-slate-800">4. Doctor Video Consultation</span>
+          <span class="text-[9px] uppercase px-1.5 py-0.2 bg-blue-100 text-blue-700 font-semibold rounded">Synthetic demo</span>
+        </div>
+        <p class="text-[11px] text-slate-600">"Follow-up review for mild skin rash on 6-year-old child with pediatrician."</p>
+      </button>
+
+      <!-- 5. Unclear request requiring follow-up -->
+      <button type="button" onclick="applyScenario('I feel slightly uncomfortable since morning, not sure what kind of test or doctor is required.')" class="w-full p-3 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 text-left transition-all">
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-bold text-slate-800">5. Unclear Request (Follow-up)</span>
+          <span class="text-[9px] uppercase px-1.5 py-0.2 bg-blue-100 text-blue-700 font-semibold rounded">Synthetic demo</span>
+        </div>
+        <p class="text-[11px] text-slate-600">"I feel slightly uncomfortable since morning, not sure what kind of test or doctor is required."</p>
+      </button>
+
+      <!-- 6. Emergency demo -->
+      <button type="button" onclick="applyScenario('Sudden severe chest pain radiating to left arm with extreme sweating.')" class="w-full p-3 rounded-xl border border-rose-200 bg-rose-50/40 hover:bg-rose-50 text-left transition-all">
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-xs font-bold text-rose-800">6. Emergency Demo Scenario</span>
+          <span class="text-[9px] uppercase px-1.5 py-0.2 bg-rose-200 text-rose-800 font-semibold rounded">Synthetic demo</span>
+        </div>
+        <p class="text-[11px] text-rose-700 font-medium">"Sudden severe chest pain radiating to left arm with extreme sweating."</p>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- END: Sample Scenarios Modal Sheet -->
+
+<!-- BEGIN: Settings & Preferences Modal Sheet -->
+<div id="settingsModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex flex-col justify-end p-0" role="dialog" aria-modal="true" aria-labelledby="settingsSheetTitle">
+  <div class="bg-white rounded-t-3xl p-5 max-h-[85vh] overflow-y-auto space-y-4 shadow-2xl text-left">
+    <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+      <div>
+        <h3 id="settingsSheetTitle" class="text-sm font-bold text-slate-800">Settings &amp; Preferences</h3>
+        <p class="text-[11px] text-slate-500">TriageGrid accessibility and demo preferences.</p>
+      </div>
+      <button type="button" onclick="closeSettingsModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center min-w-[36px] min-h-[36px]" aria-label="Close settings">
+        <span class="material-symbols-outlined text-base">close</span>
+      </button>
+    </div>
+
+    <!-- Language Preference -->
+    <div>
+      <label class="text-xs font-bold text-slate-700 block mb-1">Language</label>
+      <div class="grid grid-cols-3 gap-2">
+        <button type="button" onclick="setLang('EN')" class="px-3 py-2 text-xs font-semibold rounded-xl border border-blue-500 bg-blue-50 text-blue-700">English</button>
+        <button type="button" onclick="setLang('HI')" class="px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50">हिन्दी</button>
+        <button type="button" onclick="setLang('HING')" class="px-3 py-2 text-xs font-semibold rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50">Hinglish</button>
+      </div>
+    </div>
+
+    <!-- Text Size -->
+    <div>
+      <label class="text-xs font-bold text-slate-700 block mb-1">Text Size</label>
+      <div class="grid grid-cols-3 gap-2 text-center">
+        <button type="button" class="py-1.5 text-xs font-semibold rounded-lg border border-slate-200 bg-slate-100 text-slate-800">Standard</button>
+        <button type="button" class="py-1.5 text-xs font-semibold rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600">Large</button>
+        <button type="button" class="py-1.5 text-xs font-semibold rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600">Extra Large</button>
+      </div>
+    </div>
+
+    <!-- Accessibility Toggles -->
+    <div class="space-y-2 pt-1 border-t border-slate-100">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs font-semibold text-slate-700">Spoken responses</p>
+          <p class="text-[10px] text-slate-400">Read triage questions aloud</p>
+        </div>
+        <input type="checkbox" checked="" class="rounded text-blue-600 focus:ring-blue-500 h-4 w-4">
+      </div>
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs font-semibold text-slate-700">Reduce motion</p>
+          <p class="text-[10px] text-slate-400">Minimize animation effects</p>
+        </div>
+        <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500 h-4 w-4">
+      </div>
+    </div>
+
+    <!-- Notice regarding browser speech recognition -->
+    <div class="p-3 bg-blue-50 rounded-xl border border-blue-100 text-[11px] text-blue-800">
+      <div class="flex items-center gap-1 font-bold mb-0.5">
+        <span class="material-symbols-outlined text-sm">info</span>
+        <span class="">Speech Recognition Notice</span>
+      </div>
+      Unsupported browser speech recognition displays as unavailable with direct fallback to text entry rather than fake microphone controls.
+    </div>
+
+    <!-- About this demo -->
+    <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-[11px] text-slate-600 space-y-1">
+      <p class="font-bold text-slate-800">About this demo</p>
+      <p class="">Synthetic-data care navigation scope with simulated caregiver routing.</p>
+      <p class="text-[10px] text-slate-500">No login, payment systems, or real patient health records. Datasets and scenarios are fictional examples.</p>
+    </div>
+
+    <!-- Clear Demo Data with explicit confirmation -->
+    <div class="pt-1">
+      <button type="button" onclick="confirmClearDemoData()" class="w-full py-2.5 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-bold transition-colors min-h-[44px]">
+        Clear Local Demo Data
+      </button>
+    </div>
+  </div>
+</div>
+<!-- END: Settings Modal Sheet -->
+
+<!-- Interactive Controller Script -->
+<script>
+  function toggleLanguage() {
+    const langs = ['EN', 'HI', 'HING'];
+    const el = document.getElementById('currentLangText');
+    let curr = el.innerText;
+    let nextIdx = (langs.indexOf(curr) + 1) % langs.length;
+    el.innerText = langs[nextIdx];
+  }
+  function setLang(code) {
+    document.getElementById('currentLangText').innerText = code;
+    closeSettingsModal();
+  }
+  function openScenarioModal() {
+    document.getElementById('scenarioModal').classList.remove('hidden');
+  }
+  function closeScenarioModal() {
+    document.getElementById('scenarioModal').classList.add('hidden');
+  }
+  function applyScenario(text) {
+    document.getElementById('concernInput').value = text;
+    closeScenarioModal();
+    document.getElementById('concernInput').focus();
+  }
+  function openSettingsModal() {
+    document.getElementById('settingsModal').classList.remove('hidden');
+  }
+  function closeSettingsModal() {
+    document.getElementById('settingsModal').classList.add('hidden');
+  }
+  function prefillShortcut(intent) {
+    document.getElementById('concernInput').value = 'Requesting ' + intent + ': ';
+    document.getElementById('concernInput').focus();
+  }
+  function openEmergencyDemo() {
+    alert('Opening simulated Emergency Demo protocol (Fictional triage only. Does not dial real emergency dispatch).');
+  }
+  function startVoiceSimulation() {
+    document.getElementById('voiceStateIdle').classList.add('hidden');
+    document.getElementById('voiceStateListening').classList.remove('hidden');
+  }
+  function stopVoiceSimulation() {
+    document.getElementById('voiceStateListening').classList.add('hidden');
+    document.getElementById('voiceStateTranscribing').classList.remove('hidden');
+    setTimeout(() => {
+      document.getElementById('voiceStateTranscribing').classList.add('hidden');
+      document.getElementById('voiceStateIdle').classList.remove('hidden');
+      document.getElementById('concernInput').value = 'Mummy ko 2 din se bukhar hai aur ulti aa rahi hai.';
+      document.getElementById('concernInput').focus();
+    }, 1200);
+  }
+  function triggerVoiceFallback() {
+    document.getElementById('voiceStateListening').classList.add('hidden');
+    document.getElementById('voiceStateError').classList.remove('hidden');
+  }
+  function resetVoiceState() {
+    document.getElementById('voiceStateError').classList.add('hidden');
+    document.getElementById('voiceStateIdle').classList.remove('hidden');
+  }
+  let isSubmitting = false;
+  function handleCareSubmit() {
+    if (isSubmitting) return;
+    const input = document.getElementById('concernInput');
+    if (!input.value.trim()) {
+      input.focus();
+      return;
+    }
+    isSubmitting = true;
+    const btnText = document.getElementById('submitBtnText');
+    const original = btnText.innerText;
+    btnText.innerText = 'Analyzing concern...';
+    setTimeout(() => {
+      btnText.innerText = original;
+      isSubmitting = false;
+      alert('Intake step 1 complete. Proceeding to clarifying questions.');
+    }, 1200);
+  }
+  function toggleBookingView() {
+    const empty = document.getElementById('bookingEmptyState');
+    const pop = document.getElementById('bookingPopulatedState');
+    const btn = document.getElementById('variantToggleBtn');
+    if (pop.classList.contains('hidden')) {
+      pop.classList.remove('hidden');
+      empty.classList.add('hidden');
+      btn.innerText = 'Show empty state';
+    } else {
+      pop.classList.add('hidden');
+      empty.classList.remove('hidden');
+      btn.innerText = 'Show populated sample';
+    }
+  }
+  function focusIntake() {
+    document.getElementById('concernInput').focus();
+  }
+  function navigateToBookings() {
+    toggleBookingView();
+  }
+  function confirmClearDemoData() {
+    if (confirm('Are you sure you want to clear simulated local demo requests and reset state?')) {
+      document.getElementById('concernInput').value = '';
+      const empty = document.getElementById('bookingEmptyState');
+      const pop = document.getElementById('bookingPopulatedState');
+      pop.classList.add('hidden');
+      empty.classList.remove('hidden');
+      document.getElementById('variantToggleBtn').innerText = 'Show populated sample';
+      closeSettingsModal();
+      alert('Demo data cleared.');
+    }
+  }
+</script></div>
+
+
+
+
+</body></html>

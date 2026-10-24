@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>TriageGrid - Step 2: Intake &amp; Understanding</title>
+<!-- Tailwind CSS CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+              950: '#071d36',
+            },
+            surface: '#f8fafc',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          boxShadow: {
+            'floating': '0 12px 30px -4px rgba(14, 31, 53, 0.12), 0 4px 10px -2px rgba(14, 31, 53, 0.06)',
+            'card': '0 4px 16px 0 rgba(37, 99, 235, 0.06)',
+            'elevated-pill': '0 8px 20px -3px rgba(37, 99, 235, 0.45)',
+          }
+        }
+      }
+    };
+  </script>
+<!-- BEGIN: Custom Font & Reset Styles -->
+<style data-purpose="typography">
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+<style data-purpose="layout-utilities">
+    /* Prevent unwanted pull-to-refresh on mobile device wrappers */
+    html, body {
+      overscroll-behavior-y: none;
+      background-color: #e2e8f0;
+    }
+    /* Hide scrollbars for crisp UI presentation */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<!-- END: Custom Font & Reset Styles -->
+</head>
+<body class="min-h-screen flex items-center justify-center p-0 md:p-6 bg-slate-100 text-slate-800">
+<!-- BEGIN: Mobile Device Frame -->
+<div class="relative w-full max-w-[390px] min-h-screen md:min-h-[844px] bg-[#F8FAFC] md:rounded-[44px] overflow-hidden shadow-2xl flex flex-col border-0 md:border-8 md:border-slate-800" data-purpose="mobile-viewport-container">
+<!-- BEGIN: TopHeader -->
+<header class="bg-gradient-to-b from-brand-600 via-brand-600 to-brand-500 text-white pt-3 px-5 pb-12 relative select-none">
+<!-- iOS Status Bar Representation -->
+<div class="flex justify-between items-center text-xs font-semibold tracking-tight pb-3" data-purpose="status-bar">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<!-- Signal Icon -->
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24">
+<path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z" opacity="0.3"></path>
+<path d="M2 18h3v4H2zm6-5h3v9H8zm6-5h3v14h-3zm6-6h3v20h-3z"></path>
+</svg>
+<!-- Wifi Icon -->
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24">
+<path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A16.88 16.88 0 0 0 12 4zm0 4.5c2.97 0 5.68 1.15 7.73 3.02L12 19.38 4.27 11.52C6.32 9.65 9.03 8.5 12 8.5z"></path>
+</svg>
+<!-- Battery Icon -->
+<div class="w-5 h-2.5 border border-white/80 rounded-sm p-0.5 flex items-center">
+<div class="h-full bg-white rounded-2xs w-4"></div>
+</div>
+</div>
+</div>
+<!-- App Bar Navigation -->
+<div class="flex items-center justify-between mt-1 mb-4" data-purpose="app-bar">
+<a aria-label="Go Back" class="w-9 h-9 rounded-full bg-white/15 backdrop-blur-md flex items-center justify-center hover:bg-white/25 active:scale-95 transition-all text-white border border-white/10" data-purpose="back-button" href="#back">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+</a>
+<!-- Identity and Logo -->
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-white/20 p-1 flex items-center justify-center shadow-inner backdrop-blur-md">
+<img alt="TriageGrid Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UfmjE80k9cTeszyi8_dyraXWIIooGtc62S0-b7qD3nwbsgb9mPLz1E25tAQ8oKyo4GjOEkgbV1ramh32a_h9gEYcGS187eQWW-AVIPde9O-mBecKg8RGE_xlndQyWdhkiuS5qAFFusULn5wogf1XirjPLQ4lEwIeUayGNAG5RhEqyMHeCn_oQ-XUFC-Ke6sfsQFyVHFEtWKODSisZBc8w-AvjpitOh8TQYY_FpnpbOrLlOO6a2RPgmMhI"/>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-extrabold text-base tracking-tight text-white leading-none">TriageGrid</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-white/20 text-white uppercase tracking-wider backdrop-blur-sm border border-white/20">Demo</span>
+</div>
+<p class="text-[10px] text-brand-100 font-medium leading-none mt-1">Care Navigation</p>
+</div>
+</div>
+<!-- Controls: Language and Settings -->
+<div class="flex items-center gap-1.5">
+<button class="px-2 py-1 bg-white/15 backdrop-blur-md rounded-full text-xs font-bold border border-white/20 hover:bg-white/25 transition" data-purpose="language-selector">EN</button>
+<button aria-label="Settings" class="w-8 h-8 rounded-full bg-white/15 backdrop-blur-md flex items-center justify-center hover:bg-white/25 transition" data-purpose="settings-button">
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+<!-- Step Indicator & Header Title -->
+<div class="mt-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/20 text-brand-50 border border-white/20 mb-2">
+          Step 2 of 8 · Intake &amp; Understanding
+        </span>
+<h1 class="text-xl font-bold tracking-tight text-white leading-tight">
+          Review your care request
+        </h1>
+<p class="text-xs text-brand-100 font-normal leading-relaxed mt-1 opacity-90">
+          We extracted factual details from your spoken or written concern without making diagnostic assumptions.
+        </p>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 -mt-6 bg-[#F8FAFC] rounded-t-3xl shadow-xl z-10 px-4 pt-5 pb-40 overflow-y-auto no-scrollbar space-y-4">
+<!-- BEGIN: SectionBeneficiary -->
+<section class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100" data-purpose="beneficiary-selection">
+<h2 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5">Who is this care request for?</h2>
+<div class="grid grid-cols-2 gap-2">
+<!-- Myself Option -->
+<button class="py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold text-xs text-center transition flex items-center justify-center gap-1.5" type="button">
+<span>Myself</span>
+</button>
+<!-- Family Member Option (Selected) -->
+<button class="py-2.5 px-3 rounded-xl border-2 border-brand-600 bg-brand-50/80 text-brand-800 font-bold text-xs text-center transition flex items-center justify-center gap-1.5 shadow-sm" type="button">
+<svg class="w-4 h-4 text-brand-600 shrink-0" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path>
+</svg>
+<span class="truncate">Family member (Mother)</span>
+</button>
+</div>
+</section>
+<!-- END: SectionBeneficiary -->
+<!-- BEGIN: SectionTranscript -->
+<section class="bg-brand-50/60 rounded-2xl p-4 border border-brand-100 shadow-sm relative overflow-hidden" data-purpose="verbatim-transcript">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<!-- Audio waves icon -->
+<div class="w-6 h-6 rounded-lg bg-brand-600 text-white flex items-center justify-center shrink-0">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+</div>
+<span class="text-xs font-bold text-brand-950">Original request transcript</span>
+</div>
+<button class="text-[11px] font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1" type="button">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Edit text
+          </button>
+</div>
+<!-- Quoted Speech Content -->
+<blockquote class="italic text-sm font-medium text-slate-800 bg-white/70 p-3 rounded-xl border border-brand-100/70 shadow-2xs">
+          “Mummy ko 2 din se bukhar hai, ghar pe dikhana hai.”
+        </blockquote>
+<div class="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-brand-100/60 text-brand-800 rounded-md font-semibold text-[10px]">
+            Hindi / Hinglish spoken audio
+          </span>
+<span class="text-slate-400">Captured at 9:40 AM</span>
+</div>
+<!-- Mock Mini Audio Player Strip -->
+<div class="mt-3 pt-3 border-t border-brand-200/50 flex items-center gap-3" data-purpose="audio-player-strip">
+<button aria-label="Play audio" class="w-7 h-7 rounded-full bg-brand-600 text-white flex items-center justify-center shrink-0 shadow-sm hover:bg-brand-700 transition" type="button">
+<svg class="w-3.5 h-3.5 fill-current ml-0.5" viewbox="0 0 24 24">
+<path d="M8 5v14l11-7z"></path>
+</svg>
+</button>
+<!-- Mock Audio Scrubber Track -->
+<div class="flex-1 flex flex-col justify-center">
+<div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-full w-[36%] rounded-full"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-slate-500 mt-1">
+<span>0:04</span>
+<span>0:11</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-brand-700 bg-brand-100 px-1.5 py-0.5 rounded">1.0x</span>
+</div>
+</section>
+<!-- END: SectionTranscript -->
+<!-- BEGIN: SectionServiceArea -->
+<section class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100" data-purpose="service-area">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Care Location &amp; Dispatch Area</h2>
+<span class="text-[10px] text-emerald-600 font-semibold bg-emerald-50 border border-emerald-200/60 px-2 py-0.5 rounded-full">Active zone</span>
+</div>
+<div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-3">
+<div class="w-7 h-7 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center shrink-0 mt-0.5">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-slate-900 leading-tight">Sector 14, Dwarka (Synthetic Demo Zone)</p>
+<p class="text-[11px] text-slate-500 mt-0.5">Sub-zone: South-West Cluster B · Est. transit: 20-25 mins</p>
+</div>
+<button class="text-xs text-brand-600 font-bold hover:underline">Change</button>
+</div>
+<p class="text-[10px] text-slate-400 mt-2 flex items-center gap-1 font-medium">
+<svg class="w-3 h-3 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Synthetic location only. No live GPS permissions accessed.
+        </p>
+</section>
+<!-- END: SectionServiceArea -->
+<!-- BEGIN: SectionExtractedFacts -->
+<section class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100" data-purpose="fact-extraction">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-1.5">
+<h2 class="text-xs font-bold text-slate-900">What we understood</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              Zero Assumptions
+            </span>
+</div>
+<span class="text-[10px] text-slate-400">Rule-based parsing</span>
+</div>
+<!-- Structured Key-Value Rows -->
+<div class="divide-y divide-slate-100 text-xs">
+<!-- Fact 1 -->
+<div class="py-2.5 flex items-center justify-between">
+<span class="text-slate-500 font-medium">Request for</span>
+<span class="text-slate-900 font-bold">Family member (Mother)</span>
+</div>
+<!-- Fact 2 -->
+<div class="py-2.5 flex items-center justify-between">
+<span class="text-slate-500 font-medium">Reported concern</span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-100">
+              Fever (Bukhar)
+            </span>
+</div>
+<!-- Fact 3 -->
+<div class="py-2.5 flex items-center justify-between">
+<span class="text-slate-500 font-medium">Reported duration</span>
+<span class="text-slate-900 font-bold">2 days</span>
+</div>
+<!-- Fact 4 -->
+<div class="py-2.5 flex items-center justify-between">
+<span class="text-slate-500 font-medium">Stated preference</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-100">
+              Home assessment by medic
+            </span>
+</div>
+<!-- Fact 5: Missing detail -->
+<div class="py-2.5 flex items-center justify-between">
+<span class="text-slate-500 font-medium">Age</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium italic text-slate-400 bg-slate-100 border border-slate-200/50">
+              Not provided
+            </span>
+</div>
+<!-- Fact 6: Missing detail -->
+<div class="py-2.5 flex items-center justify-between">
+<span class="text-slate-500 font-medium">Breathing difficulty</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium italic text-slate-400 bg-slate-100 border border-slate-200/50">
+              Not provided
+            </span>
+</div>
+</div>
+<!-- Guardrail Notice -->
+<div class="mt-3 p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 text-[11px] text-slate-500 leading-normal flex items-start gap-2">
+<svg class="w-4 h-4 text-brand-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span><strong>Factual extraction only.</strong> Missing details are intentionally left unverified to avoid clinical misdiagnosis or premature assumptions.</span>
+</div>
+</section>
+<!-- END: SectionExtractedFacts -->
+<!-- BEGIN: SectionActionButtons -->
+<section class="pt-2 space-y-2.5" data-purpose="navigation-actions">
+<a class="w-full min-h-[52px] bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 active:scale-[0.99] text-white font-bold rounded-full shadow-md shadow-brand-500/25 flex items-center justify-center gap-2 text-sm transition-all" href="#clinical-check">
+<span>Continue to Clinical Check</span>
+<svg class="w-4 h-4 stroke-current" fill="none" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+</a>
+<button class="w-full min-h-[48px] bg-white border border-slate-200 hover:bg-slate-50 active:scale-[0.99] text-slate-700 font-semibold rounded-full flex items-center justify-center text-xs transition-all shadow-2xs" type="button">
+          Edit request transcript
+        </button>
+</section>
+<!-- END: SectionActionButtons -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: FloatingBottomNavigation -->
+<nav class="absolute bottom-5 inset-x-4 z-30" data-purpose="floating-nav-bar">
+<div class="bg-white/95 backdrop-blur-md rounded-full px-6 py-2.5 shadow-floating border border-slate-100 flex items-center justify-between">
+<!-- Tab: Home -->
+<button class="flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-brand-600 transition group" type="button">
+<svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-[10px] font-semibold">Home</span>
+</button>
+<!-- Tab: Care Request (Active Raised Button) -->
+<button class="flex flex-col items-center justify-center relative -mt-5 group focus:outline-none" type="button">
+<div class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 to-brand-500 text-white flex items-center justify-center shadow-elevated-pill group-active:scale-95 transition-all border-4 border-white">
+<!-- Medical Cross / Plus Icon -->
+<svg class="w-6 h-6 stroke-current" fill="none" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<span class="text-[10px] font-extrabold text-brand-600 mt-0.5 tracking-tight">Care Request</span>
+</button>
+<!-- Tab: Bookings -->
+<button class="flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-brand-600 transition group" type="button">
+<svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-[10px] font-semibold">Bookings</span>
+</button>
+</div>
+</nav>
+<!-- END: FloatingBottomNavigation -->
+</div>
+<!-- END: Mobile Device Frame -->
+</body></html>

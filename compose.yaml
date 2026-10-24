@@ -1,0 +1,16 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports: ["127.0.0.1:8000:8000"]
+    env_file: .env
+    environment:
+      TRIAGE_ALLOWED_ORIGINS: http://localhost:8080,http://127.0.0.1:8080
+    volumes: ["booking_state:/app/var"]
+  web:
+    build: ./frontend
+    ports: ["127.0.0.1:8080:80"]
+    depends_on: [api]
+volumes:
+  booking_state:

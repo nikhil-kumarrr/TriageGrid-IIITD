@@ -1,0 +1,12 @@
+streamlit>=1.40
+pandas>=2.0
+numpy
+joblib
+matplotlib
+scikit-learn==1.9.1   # .pkl is sklearn-version specific (app auto-retrains on mismatch)
+# optional REST API
+fastapi>=0.110
+uvicorn[standard]>=0.29
+httpx
+# dev
+pytest>=8

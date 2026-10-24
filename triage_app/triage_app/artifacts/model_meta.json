@@ -1,0 +1,107 @@
+{
+  "trained_at_utc": "2026-10-24T10:24:29+00:00",
+  "sklearn_version": "1.9.1",
+  "best_C": 30.0,
+  "conf_threshold": 0.45,
+  "n_rows": 340,
+  "n_unique_texts": 65,
+  "care_type_classes": [
+    "emergency_112",
+    "home_nursing",
+    "lab_test_home",
+    "needs_clarification",
+    "paramedic_home_visit",
+    "teleconsultation"
+  ],
+  "urgency_classes": [
+    "emergency",
+    "needs_clarification",
+    "same_day",
+    "scheduled"
+  ],
+  "cv_group_accuracy": 0.7147,
+  "cv_group_macro_f1": 0.6466,
+  "cv_per_class": {
+    "emergency_112": {
+      "precision": 0.812,
+      "recall": 0.696,
+      "f1-score": 0.75,
+      "support": 56.0
+    },
+    "home_nursing": {
+      "precision": 0.725,
+      "recall": 1.0,
+      "f1-score": 0.841,
+      "support": 103.0
+    },
+    "lab_test_home": {
+      "precision": 1.0,
+      "recall": 0.765,
+      "f1-score": 0.867,
+      "support": 51.0
+    },
+    "needs_clarification": {
+      "precision": 0.4,
+      "recall": 0.154,
+      "f1-score": 0.222,
+      "support": 39.0
+    },
+    "paramedic_home_visit": {
+      "precision": 0.392,
+      "recall": 0.465,
+      "f1-score": 0.426,
+      "support": 43.0
+    },
+    "teleconsultation": {
+      "precision": 0.8,
+      "recall": 0.75,
+      "f1-score": 0.774,
+      "support": 48.0
+    },
+    "macro avg": {
+      "precision": 0.688,
+      "recall": 0.638,
+      "f1-score": 0.647,
+      "support": 340.0
+    },
+    "weighted avg": {
+      "precision": 0.712,
+      "recall": 0.715,
+      "f1-score": 0.697,
+      "support": 340.0
+    }
+  },
+  "c_search": [
+    {
+      "C": 0.3,
+      "accuracy": 0.7,
+      "macro_f1": 0.6301
+    },
+    {
+      "C": 1.0,
+      "accuracy": 0.7,
+      "macro_f1": 0.6301
+    },
+    {
+      "C": 3.0,
+      "accuracy": 0.7118,
+      "macro_f1": 0.6435
+    },
+    {
+      "C": 10.0,
+      "accuracy": 0.7147,
+      "macro_f1": 0.6457
+    },
+    {
+      "C": 30.0,
+      "accuracy": 0.7147,
+      "macro_f1": 0.6466
+    },
+    {
+      "C": 100.0,
+      "accuracy": 0.7147,
+      "macro_f1": 0.6428
+    }
+  ],
+  "note": "Pickles are sklearn-version specific; app auto-retrains on version mismatch."
+}
