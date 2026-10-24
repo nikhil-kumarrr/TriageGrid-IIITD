@@ -1,8 +1,8 @@
 {
   "scope": "In-sample integration audit; training rows, NOT held-out accuracy or clinical validation",
   "requests": 340,
-  "p50_ms": 1.1155834945384413,
-  "p95_ms": 1.2930420052725822,
+  "p50_ms": 1.1499584943521768,
+  "p95_ms": 1.4120830164756626,
   "care_agreement": 1.0,
   "urgency_agreement": 1.0,
   "schema_failures": 0,

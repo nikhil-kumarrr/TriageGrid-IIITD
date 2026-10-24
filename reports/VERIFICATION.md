@@ -8,7 +8,7 @@
 - Real TinyFish extraction returned AIIMS public-site contact/address/service information; report saved without credentials. Later run timed out and correctly became unavailable. No current bed/dispatch claim.
 - Browser microphone implementation uses real recognition with permission explanation and text fallback. Physical device recognition/permission was not exercised automatically.
 - Docker is unavailable here, so Docker execution is unverified.
-- Local Git initialization was blocked by host filesystem protection. Source files and ignore rules exist; no remote repository or push was created.
+- Git repository initialized and successfully published to https://github.com/nikhil-kumarrr/TriageGrid (branch main). Root pytest.ini configured for direct pytest execution.
 
 Classifier metrics are grouped model-selection results, not clinical validation. Known source flag errors are documented in DATA_USAGE.md.
 
