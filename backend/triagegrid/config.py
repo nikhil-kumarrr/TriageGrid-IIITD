@@ -2,6 +2,8 @@ from dataclasses import dataclass
 import os
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
+from dotenv import load_dotenv
+load_dotenv(ROOT / ".env", override=False)
 @dataclass(frozen=True)
 class Settings:
     database_path: Path = ROOT / os.getenv("TRIAGE_DATABASE_PATH", "var/triagegrid.sqlite3")

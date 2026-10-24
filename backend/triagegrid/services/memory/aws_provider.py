@@ -1,4 +1,4 @@
-import os
+import time
 import json
 from typing import Any
 from .base import MemoryProvider, ChatMessage, StructuredFacts, utc_now
@@ -6,50 +6,70 @@ from ...config import settings
 
 class AWSMemoryProvider(MemoryProvider):
     """
-    AWS Memory implementation targeting Amazon DynamoDB for deterministic,
-    sub-10ms session memory and TTL expiration.
+    Session memory backed by Amazon DynamoDB.
+    Uses the standard AWS credential chain; does not promise latency or TTL.
     Evaluated against AWS Bedrock AgentCore Memory in docs/AWS_MEMORY_EVALUATION.md.
     """
     def __init__(self):
         self.region = settings.aws_region
         self.table_name = settings.aws_dynamodb_table
-        self._has_creds = bool(os.getenv("AWS_ACCESS_KEY_ID") and os.getenv("AWS_SECRET_ACCESS_KEY"))
         self._client = None
-        if self._has_creds:
-            try:
-                import boto3  # type: ignore
-                self._client = boto3.resource("dynamodb", region_name=self.region)
-            except Exception:
-                self._client = None
+        self._checked_at = 0.0
+        self._reachable = False
+        try:
+            import boto3
+            from botocore.config import Config
+            self._client = boto3.resource(
+                "dynamodb", region_name=self.region,
+                config=Config(connect_timeout=3, read_timeout=5, retries={"max_attempts": 1}),
+            )
+        except Exception:
+            self._client = None
 
     def is_configured(self) -> bool:
-        return bool(self._has_creds and self._client is not None)
+        if self._client is None:
+            return False
+        now = time.monotonic()
+        if self._checked_at and now - self._checked_at < (30 if self._reachable else 5):
+            return self._reachable
+        try:
+            response = self._client.meta.client.describe_table(TableName=self.table_name)
+            self._reachable = response["Table"]["TableStatus"] == "ACTIVE"
+        except Exception:
+            self._reachable = False
+        self._checked_at = now
+        return self._reachable
 
     def _ensure_connected(self):
-        if not self.is_configured():
-            raise RuntimeError(
-                "AWS Memory is not configured. Missing valid AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY or boto3 library."
-            )
+        if self._client is None:
+            raise RuntimeError("AWS Memory unavailable. Check the AWS SDK and credential configuration.")
 
     def get_history(self, session_id: str, limit: int = 50) -> list[ChatMessage]:
         self._ensure_connected()
+        if limit <= 0:
+            return []
         table = self._client.Table(self.table_name)
-        response = table.query(
-            KeyConditionExpression="session_id = :sid AND record_type = :rtype",
-            ExpressionAttributeValues={":sid": session_id, ":rtype": "message"},
-            Limit=limit,
-            ScanIndexForward=True,
-        )
-        items = response.get("Items", [])
+        items = []
+        cursor = None
+        while len(items) < limit:
+            query = {
+                "KeyConditionExpression": "session_id = :sid AND begins_with(sk, :prefix)",
+                "ExpressionAttributeValues": {":sid": session_id, ":prefix": "MSG#"},
+                "Limit": limit - len(items),
+                "ScanIndexForward": False,
+                "ConsistentRead": True,
+            }
+            if cursor:
+                query["ExclusiveStartKey"] = cursor
+            response = table.query(**query)
+            items.extend(response.get("Items", []))
+            cursor = response.get("LastEvaluatedKey")
+            if not cursor:
+                break
         return [
-            ChatMessage(
-                id=item["id"],
-                role=item["role"],
-                text=item["text"],
-                created=item["created"],
-                metadata=json.loads(item.get("metadata", "{}")),
-            )
-            for item in items
+            ChatMessage(id=item["id"], role=item["role"], text=item["text"],
+                        created=item["created"], metadata=json.loads(item.get("metadata", "{}")))
+            for item in reversed(items)
         ]
 
     def add_message(self, session_id: str, role: str, text: str, metadata: dict[str, Any] | None = None) -> ChatMessage:
@@ -99,10 +119,19 @@ class AWSMemoryProvider(MemoryProvider):
         self._ensure_connected()
         # DynamoDB deletion scoped to this session
         table = self._client.Table(self.table_name)
-        response = table.query(
-            KeyConditionExpression="session_id = :sid",
-            ExpressionAttributeValues={":sid": session_id},
-        )
-        with table.batch_writer() as batch:
-            for item in response.get("Items", []):
-                batch.delete_item(Key={"session_id": item["session_id"], "sk": item["sk"]})
+        cursor = None
+        while True:
+            query = {
+                "KeyConditionExpression": "session_id = :sid",
+                "ExpressionAttributeValues": {":sid": session_id},
+                "ConsistentRead": True,
+            }
+            if cursor:
+                query["ExclusiveStartKey"] = cursor
+            response = table.query(**query)
+            with table.batch_writer() as batch:
+                for item in response.get("Items", []):
+                    batch.delete_item(Key={"session_id": item["session_id"], "sk": item["sk"]})
+            cursor = response.get("LastEvaluatedKey")
+            if not cursor:
+                break

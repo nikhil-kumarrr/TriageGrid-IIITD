@@ -5,9 +5,7 @@ from ...config import settings
 
 def get_memory_provider() -> MemoryProvider:
     if settings.memory_provider == "aws":
-        provider = AWSMemoryProvider()
-        if provider.is_configured():
-            return provider
+        return AWSMemoryProvider()
     return SQLiteMemoryProvider()
 
 __all__ = ["MemoryProvider", "ChatMessage", "StructuredFacts", "get_memory_provider", "SQLiteMemoryProvider", "AWSMemoryProvider"]
