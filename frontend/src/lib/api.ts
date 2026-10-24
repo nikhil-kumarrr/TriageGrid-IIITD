@@ -39,6 +39,7 @@ export type AssistantMessage={
   created:string;
   metadata?:{
     is_emergency?:boolean;
+    sources?:{title:string;url:string}[];
     red_flags?:string[];
     follow_up_question?:string|null;
     chips?:string[];
@@ -64,6 +65,7 @@ export type AssistantStatus={
 
 export type AssistantChatResponse={
   message:string;
+  sources?:{title:string;url:string}[];
   language?:string;
   follow_up_question:string|null;
   structured_facts:StructuredFacts;

@@ -11,6 +11,7 @@ class LLMResponse:
     care_pathway_hint: str | None = None
     suggested_chips: list[str] = field(default_factory=list)
     is_emergency: bool = False
+    intent: str = "health"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -20,6 +21,7 @@ class LLMResponse:
             "care_pathway_hint": self.care_pathway_hint,
             "suggested_chips": self.suggested_chips,
             "is_emergency": self.is_emergency,
+            "intent": self.intent,
         }
 
 class LLMAdapter(ABC):

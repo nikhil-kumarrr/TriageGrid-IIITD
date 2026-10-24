@@ -3,6 +3,7 @@ from typing import Any
 from datetime import datetime, timezone
 from fastapi import HTTPException
 from .safety import scan
+from .intents import classify_intent, COPY
 from .engine import predict, roster
 from .memory import get_memory_provider, StructuredFacts, ChatMessage
 from .llm import get_llm_adapter, LLMResponse
@@ -18,7 +19,7 @@ def detect_language(text: str, default: str = "English") -> str:
         return {"english": "English", "hinglish": "Hinglish", "hindi": "Hindi"}[explicit.group(1).lower()]
     if re.search(r'[\u0900-\u097f]', text):
         return "Hindi"
-    if re.search(r'\b(mujhe|mujko|mere|meri|mera|hum|aap|hai|hain|ho|raha|rahi|din|se|ko|ghar|chahiye|mummy|papa|nahi|nahin|haan|dard|bukhar|khansi|saans|pet|batao|kya|kaise|kitne)\b', text, re.I):
+    if re.search(r'\b(mujhe|mujko|mere|meri|mera|karo|dawa|dawai|kaat|kutte|hum|aap|hai|hain|ho|raha|rahi|din|se|ko|ghar|chahiye|mummy|papa|nahi|nahin|haan|dard|bukhar|khansi|saans|pet|batao|kya|kaise|kitne)\b', text, re.I):
         return "Hinglish"
     if re.search(r"\b(i|my|have|having|feel|feeling|since|please|mother|father|need|started|days|pain|fever|cough)\b", text, re.I):
         return "English"
@@ -83,6 +84,15 @@ def handle_chat_message(
         user_meta["has_image"] = True
         user_meta["mime"] = image_mime_type or "image/jpeg"
     user_msg = mem.add_message(session_id, "user", text, user_meta)
+
+    # Standalone arithmetic is a topic change, not a symptom or a clinical fact.
+    from .calculator import calculate
+    calculation = calculate(text) if not image_base64 else None
+    if calculation is not None:
+        mem.add_message(session_id, "assistant", calculation, {"language":language, "intent":"general", "follow_up_question":None, "chips":[], "next_action":None, "is_emergency":False})
+        return {"message":calculation, "language":language, "intent":"general", "follow_up_question":None,
+            "structured_facts":mem.get_facts(session_id).to_dict(), "care_recommendation":None,
+            "suggested_chips":[], "next_action":None, "is_emergency":False}
 
     # 3. Emergency Safety Check: scan current message and all user history
     history = mem.get_history(session_id)
@@ -167,6 +177,78 @@ def handle_chat_message(
             "is_emergency": True,
         }
 
+    # Source-grounded bite/wound guidance must not depend on an LLM guessing a drug.
+    from .clinical_guidance import guidance
+    reference = guidance(text, language) if not image_base64 else None
+    # "Prescribe bhi kar do" refers to the preceding patient-reported complaint.
+    # Resolve the latest reported clinical topic, never an assistant-invented diagnosis.
+    import re
+    if reference is None and not image_base64 and re.search(r"prescrib|medicine|dawa|dawai|दवा|प्रिस्क्र", text, re.I):
+        previous_patient_text = next((m.text for m in reversed(prior_history) if m.role == "user"), "")
+        if previous_patient_text:
+            reference = guidance(previous_patient_text, language)
+    explicit_intent = classify_intent(text)
+    last_guidance = next((m.metadata.get("guidance_topic") for m in reversed(prior_history) if m.role == "assistant"), None)
+    if not reference and last_guidance == "bite" and explicit_intent == "doctor":
+        reference = guidance("dog bite", language)
+    if reference and (reference["topic"] == "bite" or explicit_intent not in {"doctor", "app_support", "human_clarification"}):
+        # Continue adaptive intake after the first note instead of replaying a script.
+        previous_reference = next((m.metadata.get("guidance_topic") for m in reversed(prior_history) if m.role == "assistant"), None)
+        if reference["topic"] == "bite" or reference["topic"] != previous_reference or re.search(r"prescrib|medicine|dawa|दवा", text, re.I):
+            action = None
+            if reference["topic"] == "knee" and existing_facts.age_group != "unspecified":
+                reference["question"] = {"English":"Have you already taken any pain medicine?", "Hindi":"क्या दर्द की कोई दवा पहले ली है?", "Hinglish":"Kya dard ki koi medicine pehle li hai?"}[language] if not existing_facts.allergies_medications else None
+            if reference["topic"] == "bite":
+                action = {"type":"urgent_assessment", "label":{"English":"Open urgent-care information", "Hindi":"तत्काल चिकित्सा जानकारी", "Hinglish":"Urgent care information dekhein"}[language], "route":"Emergency"}
+            meta = {"language":language,"intent":"health","guidance_topic":reference["topic"],"sources":reference["sources"],"reference_reviewed":reference["reviewed"],"follow_up_question":reference["question"],"chips":[],"next_action":action,"is_emergency":False}
+            mem.add_message(session_id,"assistant",reference["message"],meta)
+            return {"message":reference["message"],"language":language,"follow_up_question":reference["question"],"structured_facts":existing_facts.to_dict(),"care_recommendation":None,"suggested_chips":[],"next_action":action,"is_emergency":False,"sources":reference["sources"]}
+
+    # Explicit requests bypass symptom interrogation and do not require an LLM.
+    intent = classify_intent(text)
+    last_assistant = next((m for m in reversed(prior_history) if m.role == "assistant"), None)
+    # A free-text emotional-support conversation remains with the LLM, rather than
+    # repeating the support chooser on each new anxious sentence.
+    if intent == "emotional_support" and last_assistant and last_assistant.metadata.get("intent") == "emotional_support":
+        intent = None
+    if intent:
+        message, question, chips = COPY[language][intent]
+        recommendation = None
+        action = None
+        if intent == "doctor":
+            # Preserve explicitly denied warning signs even when access bypasses the LLM.
+            import re
+            from .safety import PATTERNS
+            for clause in re.split(r"[.!?;\n]|\b(?:but|however|lekin|magar)\b|लेकिन|मगर", text, flags=re.I):
+                positive, uncertain, cleaned = scan(clause)
+                if cleaned != clause:
+                    for concept, pattern in PATTERNS.items():
+                        if re.search(pattern, clause, re.I) and concept not in positive and concept not in uncertain:
+                            existing_facts.warning_signs[concept] = "denied"
+            existing_facts.source_message_id = user_msg.id
+            mem.update_facts(session_id, existing_facts)
+            from .engine import rank
+            from ..schemas import TriageResponse
+            req = TriageRequest(user_input=text, language=language, location=location)
+            result = TriageResponse(care_type="teleconsultation", urgency="same_day", red_flags=[], follow_up_question=None,
+                reasoning="User-requested doctor access, not a clinical urgency assessment. Supplied roster and booking are simulated.",
+                matched_caregivers=rank("teleconsultation", text, language, location))
+            rid = uid("R")
+            with connect() as db:
+                db.execute("INSERT INTO requests VALUES (?,?,?,?,?)", (rid, session_id, req.model_dump_json(), result.model_dump_json(), now()))
+            recommendation = {**result.model_dump(), "request_id": rid}
+            action = {"type": "matches", "label": {"English":"View doctor options", "Hindi":"डॉक्टर के विकल्प देखें", "Hinglish":"Doctor options dekhein"}[language], "request_id":rid, "route":"Recommendation"}
+        elif intent == "app_support":
+            action = {"type":"settings", "label":{"English":"Open settings", "Hindi":"सेटिंग्स खोलें", "Hinglish":"Settings kholein"}[language], "route":"Settings"}
+        elif intent == "immediate_safety":
+            action = {"type":"emergency", "label":{"English":"Open urgent help", "Hindi":"तत्काल मदद खोलें", "Hinglish":"Urgent help kholein"}[language], "route":"Emergency"}
+        mem.add_message(session_id, "assistant", message, {"language":language, "intent":intent,
+            "follow_up_question":question, "chips":chips, "next_action":action,
+            "is_emergency":intent == "immediate_safety"})
+        return {"message":message, "language":language, "intent":intent, "follow_up_question":question,
+            "structured_facts":existing_facts.to_dict(), "care_recommendation":recommendation,
+            "suggested_chips":chips, "next_action":action, "is_emergency":intent == "immediate_safety"}
+
     # 4. Check if LLM Adapter is configured
     if not adapter.is_configured():
         raise HTTPException(
@@ -194,7 +276,12 @@ def handle_chat_message(
     )
 
     # 6. Update structured facts from LLM extraction
-    updated_facts = StructuredFacts.from_dict(merge_facts(facts_dict, llm_resp.structured_facts))
+    # Non-medical turns may not overwrite medical facts or trigger care routing.
+    if llm_resp.intent == "general" and not llm_resp.is_emergency:
+        llm_resp.follow_up_question = None
+        llm_resp.care_pathway_hint = None
+        llm_resp.suggested_chips = []
+    updated_facts = StructuredFacts.from_dict(facts_dict if llm_resp.intent == "general" else merge_facts(facts_dict, llm_resp.structured_facts))
     updated_facts.source_message_id = user_msg.id
     mem.update_facts(session_id, updated_facts)
 
@@ -215,7 +302,7 @@ def handle_chat_message(
             db.execute("INSERT INTO requests VALUES (?,?,?,?,?)", (rid, session_id, triage_req.model_dump_json(), triage_resp.model_dump_json(), now()))
         care_recommendation = {**triage_resp.model_dump(), "request_id": rid}
         next_action = {"type": "emergency", "label": "Open Emergency Help", "request_id": rid, "route": "Emergency"}
-    elif llm_resp.follow_up_question is None or (llm_resp.care_pathway_hint and any(w in text.lower() for w in ["book", "schedule", "connect", "appointment", "proceed", "directly"])):
+    elif llm_resp.intent != "general" and (llm_resp.follow_up_question is None or (llm_resp.care_pathway_hint and any(w in text.lower() for w in ["book", "schedule", "connect", "appointment", "proceed", "directly"]))):
         # If user explicitly requested booking and care pathway was decided, clear follow_up_question to show booking action
         if llm_resp.care_pathway_hint and any(w in text.lower() for w in ["book", "schedule", "connect", "appointment", "proceed", "directly"]):
             llm_resp.follow_up_question = None
@@ -257,6 +344,7 @@ def handle_chat_message(
             "is_emergency": bool(care_recommendation and care_recommendation.get("care_type") == "emergency_112"),
             "chips": llm_resp.suggested_chips,
             "care_pathway_hint": llm_resp.care_pathway_hint,
+            "intent": llm_resp.intent,
             "next_action": next_action,
         },
     )

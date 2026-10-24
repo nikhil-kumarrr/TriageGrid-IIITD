@@ -96,6 +96,7 @@ class GeminiAdapter(LLMAdapter):
                     care_pathway_hint=parsed.get("care_pathway_hint"),
                     suggested_chips=parsed.get("suggested_chips", []),
                     is_emergency=bool(parsed.get("is_emergency", False)),
+                    intent="general" if parsed.get("intent") == "general" else "health",
                 )
             except Exception as e:
                 last_error = e

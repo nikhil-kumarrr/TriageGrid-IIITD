@@ -1,0 +1,23 @@
+[
+  {
+    "input": "Mujhe kutte ne kaat liya injection batao",
+    "message": "Agar jaanwar ne sach mein kaata ya scratch kiya hai, wound ko turant sabun aur behte paani se kam-se-kam 15 minute dhoyein aur jaldi medical centre jayein. Symptoms ya routine home injection ka wait na karein. Doctor rabies vaccine, zaroorat par immunoglobulin, tetanus protection aur wound treatment assess karega; main injection prescribe nahi kar sakta. Bahut zyada na rukne wala bleeding ya severe illness ho to emergency help lein.",
+    "source_count": 2,
+    "action": "urgent_assessment",
+    "has_prescription": false
+  },
+  {
+    "input": "Infection ki antibiotic prescribe karo",
+    "message": "Sirf infection kehne se bacterial infection confirm nahi hota. Antibiotics virus par kaam nahi karte; treatment jagah, severity, allergy aur assessment par depend karta hai. Bachi hui antibiotic ya injection khud se shuru na karein. Main treatment ki information samjha sakta hoon aur care tak guide kar sakta hoon, prescription issue nahi kar sakta.",
+    "source_count": 1,
+    "action": null,
+    "has_prescription": false
+  },
+  {
+    "input": "2+2?",
+    "message": "2+2 = 4",
+    "source_count": 0,
+    "action": null,
+    "has_prescription": false
+  }
+]

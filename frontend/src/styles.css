@@ -12,7 +12,7 @@
 @media(max-width:360px){.brandWordmark{font-size:18px}.brandSymbol{width:32px;height:32px}.brandIdentity{gap:6px}}
 
 /* AI Assistant Chat Experience */
-.chatContainer{display:flex;flex-direction:column;gap:14px;max-width:850px;margin:auto}
+.chatContainer{display:flex;flex-direction:column;gap:14px;max-width:850px;margin:auto;padding-bottom:110px}
 .assistantHeaderCard{background:linear-gradient(135deg,#ffffff,#f6faff);border:1px solid #e1ecfa;border-radius:20px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 3px 12px #204b8206}
 .assistantHeaderCard .infoCol{display:flex;align-items:center;gap:12px}
 .assistantAvatarBadge{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#4977eb,#74a1fb);color:white;box-shadow:0 4px 12px #3c72ed2a;flex-shrink:0}
@@ -66,3 +66,5 @@
 .docChip{display:inline-flex;align-items:center;gap:4px;background:#eef5fc;color:#2c68b8;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;margin:2px 4px 2px 0}
 
 .chatFollowUp{font-weight:600;color:#233f64;margin-top:10px!important;line-height:1.65}
+
+.guidanceSources{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0;font-size:12px}.guidanceSources a{color:#275daf;text-decoration:underline}

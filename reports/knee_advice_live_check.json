@@ -1,0 +1,32 @@
+[
+  {
+    "input": "Mere ghutne mein dard hai aur Tiger Balm lagata hu",
+    "message": "Ghutne ke dard mein dard badhane wali activity kam karein. Kapde mein lapeta cold pack madad kar sakta hai; ice seedhe skin par na lagayein. Kuch adults ke liye paracetamol OTC pain-relief option hai, har cause ka ilaaj nahi. Product label aur pharmacist se suitability confirm karein, khaaskar liver/kidney problem, allergy, heavy alcohol use ya doosri medicines mein; do paracetamol wale products saath na lein. Bachchon ki advice alag hai. Garam/laal ghutne ke saath bukhar, pair par weight na rakh pana ya badi chot mein urgent assessment chahiye.",
+    "question": "Patient ki umar kitni hai?",
+    "sources": [
+      {
+        "title": "NHS knee pain self-care",
+        "url": "https://111.wales.nhs.uk/Kneepain/"
+      },
+      {
+        "title": "NHS paracetamol suitability",
+        "url": "https://www.nhs.uk/medicines/paracetamol-for-adults/"
+      }
+    ]
+  },
+  {
+    "input": "PRESCRIBE BHI KRDE BHAI",
+    "message": "Ghutne ke dard mein dard badhane wali activity kam karein. Kapde mein lapeta cold pack madad kar sakta hai; ice seedhe skin par na lagayein. Kuch adults ke liye paracetamol OTC pain-relief option hai, har cause ka ilaaj nahi. Product label aur pharmacist se suitability confirm karein, khaaskar liver/kidney problem, allergy, heavy alcohol use ya doosri medicines mein; do paracetamol wale products saath na lein. Bachchon ki advice alag hai. Garam/laal ghutne ke saath bukhar, pair par weight na rakh pana ya badi chot mein urgent assessment chahiye.",
+    "question": "Patient ki umar kitni hai?",
+    "sources": [
+      {
+        "title": "NHS knee pain self-care",
+        "url": "https://111.wales.nhs.uk/Kneepain/"
+      },
+      {
+        "title": "NHS paracetamol suitability",
+        "url": "https://www.nhs.uk/medicines/paracetamol-for-adults/"
+      }
+    ]
+  }
+]

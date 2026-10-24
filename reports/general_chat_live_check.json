@@ -1,0 +1,26 @@
+[
+  {
+    "input": "Mujhe 2 din se bukhar hai",
+    "message": "Samajh gaya, aapko 2 din se bukhar hai.",
+    "follow_up": "Kya aapko bukhar ke sath khansi, gala dard, body pain ya thand lag rahi hai?",
+    "has_care_recommendation": false
+  },
+  {
+    "input": "2+2 ?",
+    "message": "2+2 = 4",
+    "follow_up": null,
+    "has_care_recommendation": false
+  },
+  {
+    "input": "2+2=4 HOTA H YAAD RAKHNA",
+    "message": "Theek hai, yaad rakhenge ki 2+2=4 hota hai.",
+    "follow_up": null,
+    "has_care_recommendation": false
+  },
+  {
+    "input": "France ki capital kya hai?",
+    "message": "France ki capital Paris hai.",
+    "follow_up": null,
+    "has_care_recommendation": false
+  }
+]

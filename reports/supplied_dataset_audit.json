@@ -1,0 +1,19 @@
+{
+  "source": "User supplied Downloads/triage_app/triage_app/data",
+  "updated_utc": "2026-10-24T19:24:55.897894+00:00",
+  "prescription_training": false,
+  "reason": "No drug selection, dose, contraindication or prescription supervision labels provided.",
+  "triage_dataset_flat.csv": {
+    "rows": 340,
+    "sha256": "1a567311c73aa1e181b5dde8ddcc1cd32e5e44ae14718170c71eaeacf8004dfc",
+    "same_records_as_existing": true,
+    "unique_texts": 65,
+    "care_type_conflicting_groups": 0,
+    "urgency_conflicting_groups": 0
+  },
+  "caregivers.csv": {
+    "rows": 60,
+    "sha256": "b38b6b81e41fe7816b1de2f1ab772e6573963cd9fdcb3418b0b9c3341b5b88ea",
+    "same_records_as_existing": true
+  }
+}
