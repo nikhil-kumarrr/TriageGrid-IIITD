@@ -10,3 +10,46 @@
 .brand:focus-visible{outline:3px solid #c6fff0;outline-offset:6px;border-radius:12px}
 @media(max-width:600px){.brandIdentity{gap:8px}.brandSymbol{width:36px;height:36px}.brandWordmark{font-size:21px;letter-spacing:-.9px}}
 @media(max-width:360px){.brandWordmark{font-size:18px}.brandSymbol{width:32px;height:32px}.brandIdentity{gap:6px}}
+
+/* AI Assistant Chat Experience */
+.chatContainer{display:flex;flex-direction:column;gap:14px;max-width:850px;margin:auto}
+.assistantHeaderCard{background:linear-gradient(135deg,#ffffff,#f6faff);border:1px solid #e1ecfa;border-radius:20px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 3px 12px #204b8206}
+.assistantHeaderCard .infoCol{display:flex;align-items:center;gap:12px}
+.assistantAvatarBadge{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#4977eb,#74a1fb);color:white;box-shadow:0 4px 12px #3c72ed2a;flex-shrink:0}
+.assistantStatusDot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#38b88d;margin-right:5px}
+.assistantStatusDot.off{background:#df7588}
+.understoodCard{background:#f8faff;border:1px solid #dce8f8;border-radius:18px;padding:14px 18px;margin:5px 0}
+.understoodToggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:transparent;border:0;padding:4px 0;font-size:13px;font-weight:700;color:#355685;cursor:pointer;min-height:auto}
+.understoodFactsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid #e8f0fc}
+.factItem{background:white;border:1px solid #e5edf9;border-radius:12px;padding:9px 12px}
+.factItem label{display:block;font-size:10px;color:#7e92ad;text-transform:uppercase;margin:0 0 3px;font-weight:700;letter-spacing:.03em}
+.factItem span{font-size:12px;font-weight:600;color:#233c5f;display:block}
+.chatMessages{display:flex;flex-direction:column;gap:16px;padding:10px 0;min-height:220px}
+.messageRow{display:flex;gap:10px;width:100%}
+.messageRow.userRow{justify-content:flex-end}
+.messageRow.assistantRow{justify-content:flex-start}
+.messageBubble{max-width:min(88%,580px);padding:14px 18px;line-height:1.6;font-size:14px;box-shadow:0 3px 10px #1f427708}
+.userBubble{background:linear-gradient(135deg,#2b6be7,#4a54e8);color:white;border-radius:20px 20px 4px 20px}
+.assistantBubble{background:white;border:1px solid #e4ecf8;color:#1e324d;border-radius:20px 20px 20px 4px}
+.bubbleHeader{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;margin-bottom:6px;opacity:.75;letter-spacing:.03em}
+.messageBubble p{margin:4px 0}
+.chipList{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{background:#edf4fe;color:#3363aa;border:1px solid #d5e5fa;border-radius:999px;padding:7px 14px;font-size:12px;font-weight:600;min-height:34px;cursor:pointer;transition:all .15s ease}
+.chip:hover{background:#dbe9fd;color:#224f94;transform:translateY(-1px)}
+.actionCardInChat{margin-top:12px;border-radius:16px;padding:15px;display:flex;flex-direction:column;gap:10px}
+.actionCardInChat.emergencyCardInChat{background:linear-gradient(135deg,#fff2f4,#ffe1e7);border:1.5px solid #f6b5c4;color:#a32847}
+.actionCardInChat.recCardInChat{background:linear-gradient(135deg,#f4f9ff,#e7f1ff);border:1.5px solid #c9defc;color:#24497a}
+.actionCardInChat .actionTitle{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.actionCardInChat button{margin:0;width:100%}
+.chatComposer{display:flex;align-items:flex-end;gap:10px;background:white;border:1.5px solid #dbe6f6;border-radius:22px;padding:8px 12px;box-shadow:0 5px 20px #2449830c;margin-top:10px}
+.chatComposer textarea{border:0;padding:8px 4px;margin:0;min-height:42px;max-height:120px;resize:none;outline:none!important;font-size:14px;line-height:1.5;background:transparent}
+.chatComposer button{min-height:42px;height:42px;padding:0 14px;border-radius:14px}
+.micComposerBtn{width:42px;min-width:42px;padding:0;background:#eff4fb;color:#4571ae;border:1px solid #d8e5f6}
+.micComposerBtn:hover{background:#e0ebfa;color:#285797}
+.micComposerBtn.activeMic{background:#ee4970;color:white;border-color:#ee4970;animation:pulse 1.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #ee497066}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.unconfiguredBanner{background:#fff8eb;border:1px solid #fae3be;border-radius:18px;padding:16px 20px;color:#875411;margin:10px 0}
+.unconfiguredBanner h3{margin:0 0 6px;font-size:14px;display:flex;align-items:center;gap:8px}
+.unconfiguredBanner p{font-size:12px;line-height:1.6;margin:0 0 12px}
+.unconfiguredBanner button{margin:0}
+

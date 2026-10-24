@@ -15,3 +15,72 @@ export async function api<T>(path:string,body?:unknown,method?:string):Promise<T
 }
 export const caregivers=()=>api<Caregiver[]>('/caregivers');
 export const triage=(body:unknown)=>api<{request_id:string;result:Result}>('/ui/triage',body);
+
+export type StructuredFacts={
+  patient_target:string;
+  age_group:string;
+  symptoms:string[];
+  duration:string;
+  severity:string;
+  warning_signs:Record<string,string>;
+  existing_conditions:string[];
+  allergies_medications:string[];
+  care_preference:string;
+  uncertainties:string[];
+  updated_at?:string;
+};
+
+export type AssistantMessage={
+  id:string;
+  role:'user'|'assistant';
+  text:string;
+  created:string;
+  metadata?:{
+    is_emergency?:boolean;
+    red_flags?:string[];
+    follow_up_question?:string|null;
+    chips?:string[];
+    care_pathway_hint?:string|null;
+    next_action?:{
+      type:string;
+      label:string;
+      request_id?:string;
+      route?:string;
+    }|null;
+  };
+};
+
+export type AssistantStatus={
+  configured:boolean;
+  provider:string;
+  memory_provider:string;
+  supported_languages:string[];
+  message:string;
+};
+
+export type AssistantChatResponse={
+  message:string;
+  follow_up_question:string|null;
+  structured_facts:StructuredFacts;
+  care_recommendation:(Result&{request_id:string})|null;
+  suggested_chips:string[];
+  next_action:{
+    type:string;
+    label:string;
+    request_id?:string;
+    route?:string;
+  }|null;
+  is_emergency:boolean;
+};
+
+export type AssistantConversation={
+  messages:AssistantMessage[];
+  structured_facts:StructuredFacts;
+  care_recommendation:(Result&{request_id:string})|null;
+};
+
+export const assistantStatus=()=>api<AssistantStatus>('/assistant/status');
+export const assistantConversation=()=>api<AssistantConversation>('/assistant/conversation');
+export const assistantChat=(body:{message:string;language?:string;location?:{lat:number;lng:number}|null})=>api<AssistantChatResponse>('/assistant/chat',body);
+export const assistantCorrectFacts=(facts:StructuredFacts)=>api<{updated:boolean;structured_facts:StructuredFacts}>('/assistant/facts/correct',{facts});
+export const assistantClear=()=>api<{cleared:boolean}>('/assistant/conversation',undefined,'DELETE');

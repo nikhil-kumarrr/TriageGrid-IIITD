@@ -5,6 +5,11 @@ A responsive care-navigation prototype for the CareCompass challenge. The suppli
 ## Implemented journeys
 
 - Home, source dataset examples, text intake, microphone input with browser consent explanation, editable transcripts and request review.
+- Multilingual AI Care Assistant (English, Hindi, Hinglish) integrated directly into app navigation (`Home` | `AI Assistant` | `New Request` | `Bookings`).
+- Purposeful conversational intake: safety red-flag scanning, extracted structured facts, clarification without repeated questions, expandable "What I understood" fact summaries, and user corrections.
+- Integrated decision engine: conversation seamlessly hands off to the validated triage engine (`care_type`, `urgency_level`) and existing caregiver matching/booking without downgrading emergency classifications.
+- Server-side interchangeable LLM adapters (Google Gemini, xAI Grok, and automated test mock) with strict error handling, bounded retries, and honest "Assistant not configured" state when credentials are not supplied.
+- Structured session memory interface with local SQLite persistence and AWS DynamoDB evaluation (`docs/AWS_MEMORY_EVALUATION.md`).
 - Language-specific clinical questions and main interface controls (English/Hindi/Hinglish), read-aloud, larger text and reduced motion. Source dataset fields and some detailed explanations remain English.
 - Stateless conversation history, lexical safety checks, trained care/urgency pipelines and emergency matching bypass.
 - Roster eligibility, factual reasons, detail cards, language filter and time-slot selection.
@@ -13,7 +18,7 @@ A responsive care-navigation prototype for the CareCompass challenge. The suppli
 - Real TinyFish official-site extraction, background status, bounded timeout, labelled public-result cache and failure handling. No patient information is sent to TinyFish.
 - Help, mentor model metrics, data-source documentation, strict API contracts, CSV prediction script and source regression tests.
 
-Bookings and hospital handovers do not arrange real appointments, dispatch or hospital acceptance. Only provided synthetic data is permitted. This is not clinical advice or a production medical service. Admin portal is a separate later phase.
+Bookings, AI recommendations and hospital handovers do not arrange real appointments, dispatch or hospital acceptance. Only provided synthetic data is permitted. This is not clinical advice, medical diagnosis or a production medical service. The AI assistant does not prescribe drugs or guarantee safety. Admin portal is a separate later phase.
 
 ## Run locally
 
@@ -77,7 +82,7 @@ This build is intended for local synthetic-data demonstration with one API worke
 
 ## Evaluation and limitations
 
-44 automated tests currently cover contracts, safety examples, supplied multi-turn conversations, data parity, booking ownership, cancellation, concurrent slot conflicts, handover consent and mocked TinyFish outcomes. Use the latest test output as authoritative if the suite changes.
+51 automated tests currently cover contracts, safety examples, supplied multi-turn conversations, data parity, booking ownership, cancellation, concurrent slot conflicts, handover consent, AI assistant multi-turn facts extraction, emergency escalation midway, facts correction, session isolation, provider failure recovery, booking handoff, and mocked TinyFish outcomes. Use the latest test output as authoritative if the suite changes.
 
 Baseline grouped model-selection macro-F1: care type 0.6466; urgency 0.6116. These are not independent clinical validation. Lexical rules have limited language/context coverage. Some source emergency annotations are inconsistent. A successful TinyFish run returned published AIIMS information; that is not verification of bed status or real-time emergency capacity. Speech depends on browser/platform and may use remote recognition. Audio is not stored by this app.
 

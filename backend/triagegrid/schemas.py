@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Any
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 CareType = Literal["paramedic_home_visit", "home_nursing", "lab_test_home", "teleconsultation", "emergency_112"]
 Urgency = Literal["same_day", "scheduled", "emergency"]
@@ -37,3 +37,12 @@ class TriageResponse(StrictModel):
             if self.care_type != "emergency_112" or self.urgency != "emergency" or self.matched_caregivers:
                 raise ValueError("Emergency must bypass matching")
         return self
+
+class AssistantChatRequest(StrictModel):
+    message: str = Field(min_length=1, max_length=5000)
+    language: Literal["auto", "English", "Hindi", "Hinglish"] = "auto"
+    location: Location | None = None
+
+class AssistantFactsCorrectionRequest(StrictModel):
+    facts: dict[str, Any]
+

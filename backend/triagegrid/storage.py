@@ -21,7 +21,11 @@ def initialize():
         CREATE INDEX IF NOT EXISTS booking_overlap ON bookings(caregiver_id,start,end,status);
         CREATE TABLE IF NOT EXISTS handovers(id TEXT PRIMARY KEY,session_id TEXT REFERENCES sessions(id),request_id TEXT REFERENCES requests(id),summary TEXT,status TEXT,created TEXT);
         CREATE TABLE IF NOT EXISTS lookups(id TEXT PRIMARY KEY,session_id TEXT REFERENCES sessions(id),hospital_id TEXT,status TEXT,result TEXT,created TEXT);
+        CREATE TABLE IF NOT EXISTS assistant_messages(id TEXT PRIMARY KEY,session_id TEXT REFERENCES sessions(id),role TEXT,text TEXT,metadata TEXT,created TEXT);
+        CREATE INDEX IF NOT EXISTS assistant_msg_session ON assistant_messages(session_id,created);
+        CREATE TABLE IF NOT EXISTS assistant_facts(session_id TEXT PRIMARY KEY REFERENCES sessions(id),facts TEXT,updated TEXT);
         ''')
+initialize()
 def new_session():
     token=secrets.token_urlsafe(32);sid=uid('S')
     with connect() as db:db.execute('INSERT INTO sessions VALUES (?,?,?)',(sid,digest(token),now()))

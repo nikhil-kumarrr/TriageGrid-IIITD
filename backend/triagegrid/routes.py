@@ -3,10 +3,12 @@ from datetime import date
 from typing import Annotated
 from fastapi import APIRouter,Header,HTTPException,Depends,BackgroundTasks
 from pydantic import Field
-from .schemas import StrictModel,TriageRequest
+from .schemas import StrictModel,TriageRequest,AssistantChatRequest,AssistantFactsCorrectionRequest
 from .storage import connect,new_session,session_for,uid,now
 from .services.engine import predict,roster
 from .services import bookings,hospitals
+from .services.assistant import get_assistant_status,handle_chat_message
+from .services.memory import get_memory_provider,StructuredFacts
 router=APIRouter()
 def owner(x_session_token:Annotated[str|None,Header()]=None):
     sid=session_for(x_session_token)
@@ -96,7 +98,8 @@ def metrics(sid=Depends(owner)):
 def clear(sid=Depends(owner)):
     with connect() as db:
         db.execute('BEGIN IMMEDIATE')
-        for table in ['lookups','handovers','bookings','requests']:db.execute(f'DELETE FROM {table} WHERE session_id=?',(sid,))
+        for table in ['assistant_messages','assistant_facts','lookups','handovers','bookings','requests']:
+            db.execute(f'DELETE FROM {table} WHERE session_id=?',(sid,))
         db.commit()
     return {'cleared':True}
 @router.get('/examples')
@@ -114,3 +117,46 @@ def examples():
 def request_detail(rid:str,sid=Depends(owner)):
     r=bookings.source_request(sid,rid)
     return {'id':r['id'],'request':json.loads(r['payload']),'result':json.loads(r['response']),'created':r['created']}
+
+@router.get('/assistant/status')
+def assistant_status():
+    return get_assistant_status()
+
+@router.get('/assistant/conversation')
+def assistant_conversation(sid=Depends(owner)):
+    mem=get_memory_provider()
+    history=mem.get_history(sid)
+    facts=mem.get_facts(sid)
+    latest_rec=None
+    with connect() as db:
+        row=db.execute("SELECT id,response FROM requests WHERE session_id=? ORDER BY created DESC LIMIT 1",(sid,)).fetchone()
+        if row:
+            latest_rec={**json.loads(row['response']),"request_id":row['id']}
+    return {
+        "messages":[m.to_dict() for m in history],
+        "structured_facts":facts.to_dict(),
+        "care_recommendation":latest_rec,
+    }
+
+@router.post('/assistant/chat')
+def assistant_chat(req:AssistantChatRequest,sid=Depends(owner)):
+    return handle_chat_message(
+        session_id=sid,
+        user_text=req.message,
+        language=req.language,
+        location=req.location,
+    )
+
+@router.post('/assistant/facts/correct')
+def assistant_facts_correct(req:AssistantFactsCorrectionRequest,sid=Depends(owner)):
+    mem=get_memory_provider()
+    facts=StructuredFacts.from_dict(req.facts)
+    mem.update_facts(sid,facts)
+    return {"updated":True,"structured_facts":facts.to_dict()}
+
+@router.delete('/assistant/conversation')
+def assistant_clear(sid=Depends(owner)):
+    mem=get_memory_provider()
+    mem.clear(sid)
+    return {"cleared":True}
+
