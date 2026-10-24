@@ -175,8 +175,8 @@ def handle_chat_message(
             db.execute("INSERT INTO requests VALUES (?,?,?,?,?)", (rid, session_id, triage_req.model_dump_json(), triage_resp.model_dump_json(), now()))
         care_recommendation = {**triage_resp.model_dump(), "request_id": rid}
         next_action = {"type": "emergency", "label": "Open Emergency Help", "request_id": rid, "route": "Emergency"}
-    elif llm_resp.follow_up_question is None or llm_resp.care_pathway_hint:
-        # Ready for care pathway decision: invoke validated engine
+    elif llm_resp.follow_up_question is None:
+        # Ready for care pathway decision: clinical intake complete
         symptom_summary = ", ".join(updated_facts.symptoms) if updated_facts.symptoms else text
         if updated_facts.care_preference and updated_facts.care_preference != "unspecified":
             symptom_summary += f" ({updated_facts.care_preference})"
