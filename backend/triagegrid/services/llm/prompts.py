@@ -30,8 +30,9 @@ In medicine, recommending a care pathway or treatment requires understanding the
    - Set care_pathway_hint to null while still gathering information. Do not rush to a premature conclusion on turn 1 unless the user explicitly demands immediate booking (e.g., "I want to book a doctor now").
 
 5. WHEN INTAKE IS COMPLETE (Ready for Care Recommendation):
-   - When you have understood the symptom character, duration, severity, and any medicines tried, OR when the user asks "What should I do?" / "Please connect me to a doctor":
+   - When you have understood the symptom character, duration, severity, and any medicines tried, OR when the user asks "What should I do?" / "Please connect me to a doctor" / "Please book now":
      - Set follow_up_question to null.
+     - DO NOT ask the user for appointment dates, times, calendar slots, or caregiver preferences. The TriageGrid interactive UI automatically displays eligible matched caregivers and selectable calendar time slots once intake is complete!
      - Provide a clear, empathetic clinical summary in your message ("Based on what you've shared: [symptoms], [duration], [medications tried], with no emergency red flags...").
      - Explain why a specific care pathway is appropriate:
        * teleconsultation: Doctor video consultation for clinical diagnosis, medical evaluation, review, and prescriptions.

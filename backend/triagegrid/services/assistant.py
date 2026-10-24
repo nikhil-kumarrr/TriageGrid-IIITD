@@ -186,7 +186,11 @@ def handle_chat_message(
             db.execute("INSERT INTO requests VALUES (?,?,?,?,?)", (rid, session_id, triage_req.model_dump_json(), triage_resp.model_dump_json(), now()))
         care_recommendation = {**triage_resp.model_dump(), "request_id": rid}
         next_action = {"type": "emergency", "label": "Open Emergency Help", "request_id": rid, "route": "Emergency"}
-    elif llm_resp.follow_up_question is None:
+    elif llm_resp.follow_up_question is None or (llm_resp.care_pathway_hint and any(w in text.lower() for w in ["book", "schedule", "connect", "appointment", "proceed", "directly"])):
+        # If user explicitly requested booking and care pathway was decided, clear follow_up_question to show booking action
+        if llm_resp.care_pathway_hint and any(w in text.lower() for w in ["book", "schedule", "connect", "appointment", "proceed", "directly"]):
+            llm_resp.follow_up_question = None
+
         # Ready for care pathway decision: clinical intake complete
         symptom_summary = ", ".join(updated_facts.symptoms) if updated_facts.symptoms else text
         if updated_facts.care_preference and updated_facts.care_preference != "unspecified":
