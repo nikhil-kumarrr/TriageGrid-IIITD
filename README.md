@@ -22,24 +22,30 @@ Bookings, AI recommendations and hospital handovers do not arrange real appointm
 
 ## Run locally
 
-Python 3.12+ and Node 20+. From this project folder:
+Python 3.10+ and Node 18+. From this project folder:
+
+### Terminal 1: Backend (Python FastAPI)
 
 ```sh
+# Setup virtual environment and dependencies
 python3 -m venv .venv
-.venv/bin/python -m pip install -r backend/requirements-dev.txt
-.venv/bin/python scripts/train_models.py
-PYTHONPATH=backend .venv/bin/python -m uvicorn triagegrid.main:app --host 127.0.0.1 --port 8000
-```
+source .venv/bin/activate  # On Windows (cmd/PowerShell): .venv\Scripts\activate
+pip install -r backend/requirements.txt
 
-Second terminal:
+# Run the backend server (starts on http://127.0.0.1:8000)
+python run_backend.py
+```
+*(Alternative manual command: `PYTHONPATH=backend uvicorn triagegrid.main:app --host 127.0.0.1 --port 8000 --reload`)*
+
+### Terminal 2: Frontend (React / Vite)
 
 ```sh
 cd frontend
-npm ci
-npm run dev -- --port 5173
+npm install
+npm run dev
 ```
 
-Open http://127.0.0.1:5173. Frontend `/api` requests are proxied to the Python service. API docs: http://127.0.0.1:8000/docs. Restart the development server if exported files or dependency changes are not reflected.
+Open **http://127.0.0.1:5173** (or http://localhost:5173). Frontend `/api` requests are automatically proxied to the Python backend on port 8000. API docs: http://127.0.0.1:8000/docs.
 
 ## Configuration
 
