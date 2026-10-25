@@ -1,423 +1,218 @@
-# TriageGrid
+<div align="center">
 
-An intelligent care-navigation and multilingual clinical triage platform built for the CareCompass challenge (IIIT-Delhi). TriageGrid bridges patient health inquiries with validated care categorization, urgency determination, proximity-based caregiver matching, and simulated emergency handover protocols.
+# TriageGrid 🏥
+### AI-Powered Clinical Triage & Multilingual Care-Navigation Platform
+**Built for the CareCompass Challenge · IIIT-Delhi Hackathon**
 
----
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6+-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![Gemini](https://img.shields.io/badge/Gemini-REST_API-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## Table of Contents
+*Multilingual conversational intake · Machine-learned care categorization · Qualification-based caregiver matching · Emergency hospital intelligence*
 
-- [Overview](#overview)
-- [System Architecture](#system-architecture)
-- [Core Capabilities](#core-capabilities)
-- [Technology Stack](#technology-stack)
-- [Repository Structure](#repository-structure)
-- [Machine Learning and Clinical Models](#machine-learning-and-clinical-models)
-- [Local Setup and Installation](#local-setup-and-installation)
-  - [Prerequisites](#prerequisites)
-  - [Backend Setup (FastAPI)](#backend-setup-fastapi)
-  - [Frontend Setup (React + Vite)](#frontend-setup-react--vite)
-  - [Environment Configuration](#environment-configuration)
-  - [Docker Deployment](#docker-deployment)
-- [API Reference](#api-reference)
-- [Testing and Verification](#testing-and-verification)
-- [Clinical Disclaimer and Limitations](#clinical-disclaimer-and-limitations)
-- [License](#license)
+</div>
 
 ---
 
-## Overview
+## 🏗️ System Architecture & Workflow
 
-TriageGrid addresses frontline healthcare access by transforming free-text patient requests (in English, Hindi, or Hinglish) into structured clinical pathways:
-1. **Intake and Clarification:** Patient symptoms are captured through voice or text input, safety red flags are screened, and targeted follow-up clarifications are requested if context is missing.
-2. **Clinical Decision Engine:** Machine-learned classification models infer appropriate care types (e.g., home visit, tele-consultation, nurse care) and urgency levels (routine, same-day, immediate emergency).
-3. **Caregiver Matching and Slot Allocation:** An algorithm scores and ranks verified caregivers based on medical qualifications, language compatibility, travel distance, and availability windows.
-4. **Emergency Escalation:** Red-flag presentations bypass routine scheduling and route directly to an urgent response interface with official hospital intelligence gathered via TinyFish and simulated hospital handovers.
+> Complete data flow: from multilingual patient audio/text intake, through FastAPI and scikit-learn ML pipelines, to proximity-based caregiver matching, LLM clinical reasoning, and external hospital intelligence.
 
----
-
-## System Architecture
-
-### Data Flow and Relational Schema
-
-```text
-       +------------------------+                    +-------------------------+
-       |        PATIENTS        |                    |      CARE_TAXONOMY      |
-       +------------------------+                    +-------------------------+
-       | PK  patient_id         |                    | PK  care_type_code      |
-       |     full_name          |                    |     display_name        |
-       |     phone_number       |                    |     default_urgency     |
-       |     lat                |                    |     red_flag_triggers   |
-       |     lng                |                    |     min_qualification   |
-       |     pref_language      |                    +------------+------------+
-       +-----------+------------+                                 |
-                   | 1                                            | 1
-                   |                                              |
-                   | N                                            | N
-       +-----------v------------+                    +------------v------------+
-       |    INTAKE_SESSIONS     | 1                1 |     TRIAGE_RECORDS      |
-       +------------------------+--------------------+-------------------------+
-       | PK  session_id         |                    | PK  triage_id           |
-       | FK  patient_id         |                    | FK  session_id          |
-       |     input_type (v/txt) |                    | FK  care_type_code      |
-       |     raw_utterance      |                    |     urgency (rt/sd/imm) |
-       |     symptom_slots      |                    |     is_red_flag (bool)  |
-       |     turns_count        |                    |     clinical_reasoning  |
-       |     created_at         |                    |     eval_confidence     |
-       +------------------------+                    +------+- -----------+-----+
-                                                            | 1          | 1
-                                        +--------------------+            |
-                                        | 1                               | N
-                                        v                                 v
-       +------------------------------------------------+   +---------------------------+
-       |             TINYFISH_AGENT_RUNS                |   |     MATCHING_RECORDS      |
-       +------------------------------------------------+   +---------------------------+
-       | PK  run_id (TinyFish UUID)                     |   | PK  match_id              |
-       | FK  triage_id                                  |   | FK  triage_id             |
-       |     trigger_type (emergency_er / verification) |   | FK  caregiver_id          |
-       |     target_url (e.g., Delhi ER portal)         |   |     match_score (0.00-1.0)|
-       |     streaming_url                              |   |     rank_order            |
-       |     agent_status (RUNNING / COMPLETED / FAILED)|   |     distance_km           |
-       |     extracted_payload (JSON)                   |   |     justification_reason  |
-       |     num_steps                                  |   |     booking_confirmed     |
-       +------------------------------------------------+   +-------------^-------------+
-                                                                          | N
-                                                                          |
-                                                                          | 1
-                                                            +-------------+-------------+
-                                                            |        CAREGIVERS         |
-                                                            +---------------------------+
-                                                            | PK  caregiver_id          |
-                                                            |     full_name             |
-                                                            |     role (paramedic/nurse)|
-                                                            |     lat                   |
-                                                            |     lng                   |
-                                                            |     languages (JSON array)|
-                                                            |     rating                |
-                                                            |     is_active             |
-                                                            +-------------+-------------+
-                                                                          | 1
-                                                                          |
-                                                                          | N
-                                                            +-------------+-------------+
-                                                            |    AVAILABILITY_SLOTS     |
-                                                            +---------------------------+
-                                                            | PK  slot_id               |
-                                                            | FK  caregiver_id          |
-                                                            |     start_time            |
-                                                            |     end_time              |
-                                                            |     is_booked             |
-                                                            +---------------------------+
+```
+Patient (Voice / Text in EN/HI/Hinglish)
+                    ↓
+        React 19 Frontend (Vite)
+                    ↓
+          FastAPI Backend Engine
+         /          |          \
+        ↓           ↓           ↓
+ML Triage Engine  Caregiver   Conversational
+(TF-IDF + LogReg)  Matcher      AI Assistant
+[Care & Urgency]  [Distance,  (Gemini / Grok /
+                  Skills,       Local Mock)
+                  Languages]        ↓
+        ↓           ↓        TinyFish Agent
+  Emergency ER   Atomic      (Live Hospital
+  Bypass Rule    Booking     Portal Research)
 ```
 
----
+### How It Works
 
-## Core Capabilities
-
-- **Multilingual Patient Intake:** Native support for English, Hindi, and Hinglish. Supports text typing and in-browser speech recognition with real-time audio transcript editing.
-- **Conversational AI Assistant:** Stateful clinical assistant capable of tracking extracted facts, clarifying ambiguities without repetitive prompting, and preserving emergency flags across conversation turns.
-- **Pluggable LLM Adapters:** Unified backend interface with interchangeable adapters for Google Gemini, xAI Grok, and a zero-dependency deterministic Mock adapter for local testing and CI environments.
-- **Deterministic Red-Flag Safeguards:** Lexical and semantic validation rules scan for acute medical emergencies (chest pain, severe dyspnea, acute stroke indicators) and bypass non-urgent booking flows.
-- **Multi-Factor Caregiver Matching:** Evaluates qualification constraints, geographical radius via Haversine calculation, active availability slots, spoken languages, and historical ratings.
-- **Transactional Booking Protection:** Atomic SQLite transactions enforce slot idempotency and prevent double-booking across concurrent client sessions.
-- **External Web Intelligence (TinyFish):** Web agent integration searches authorized public portals (e.g., AIIMS emergency departments) for published contact numbers, addresses, and operational notices without transmitting patient data.
-- **Golden Bay Simulated Receiver:** Preview screen simulating hospital triage dashboard receiving structured patient handovers with explicit consent controls.
-- **Session-Based Authentication:** Clean user authentication layer with registration, login, mock OTP verification, and isolated session contexts.
+1. **Multilingual Patient Intake** — Accepts spoken audio (with in-browser speech recognition and editable transcript review) or direct text in English, Hindi, and Hinglish.
+2. **Deterministic Red-Flag Safeguards** — Lexical and semantic triggers screen for life-threatening emergencies (e.g., severe dyspnea, acute chest pain) before any routine scheduling can occur.
+3. **Dual-Pipeline ML Classification** — Grouped TF-IDF feature pipelines infer appropriate care category (`paramedic_home_visit`, `teleconsultation`, `nurse_visit`, `in_clinic`) and urgency (`routine`, `same_day`, `emergency`).
+4. **Caregiver Matching & Slot Allocation** — Evaluates distance via Haversine geometry, medical qualifications, languages, ratings, and time-slot availability with transactional locking.
+5. **Hospital Handover & Web Intelligence** — Emergency presentations trigger a simulated Golden Bay receiver dashboard and dispatch TinyFish agents to fetch verified emergency hospital desk contacts without leaking patient data.
 
 ---
 
-## Technology Stack
+## 📸 Application Screenshots
 
-### Backend
-- **Framework:** Python 3.10+, FastAPI, Uvicorn
-- **Data Validation & Settings:** Pydantic v2, Pydantic-Settings
-- **Machine Learning:** scikit-learn, joblib, numpy, pandas
-- **Database:** SQLite with WAL mode and ACID transaction isolation; evaluated for AWS DynamoDB session storage
-- **HTTP Client:** httpx (async requests with timeouts and bounded retries)
+### 🏥 Care Navigation Home Dashboard
+> Responsive entrypoint featuring quick intake actions, source dataset examples, language toggles, and accessible navigation.
 
-### Frontend
-- **Framework:** React 19, TypeScript
-- **Build Tool:** Vite 6
-- **Styling:** Vanilla CSS with custom design system (custom tokens, responsive grid, light/blue clinical theme)
-- **Icons & Typography:** Lucide React, Fontsource (Inter, Plus Jakarta Sans)
+![Care Navigation Home](triagegrid_care_navigation_home_blue_theme/screen.png)
 
 ---
 
-## Repository Structure
+### 🗣️ Conversational Intake & Symptom Understanding
+> Real-time intake pipeline parsing patient statements, capturing symptom facts, and confirming extracted information.
 
-```text
-TriageGrid-IIITD/
-├── backend/
-│   ├── Dockerfile                   # Backend container specification
-│   ├── requirements.txt             # Production Python dependencies
-│   ├── requirements-dev.txt         # Development and testing tools
-│   ├── tests/                       # Pytest test suite (52 test cases)
-│   └── triagegrid/
-│       ├── main.py                  # FastAPI application entrypoint
-│       ├── routes.py                # REST API endpoints
-│       ├── schemas.py               # Pydantic request and response models
-│       ├── storage.py               # SQLite persistence and database migrations
-│       └── services/
-│           ├── auth.py              # Authentication and credential validation
-│           ├── matching.py          # Caregiver scoring and slot allocation
-│           ├── safety.py            # Clinical red-flag lexical detectors
-│           ├── tinyfish.py          # External hospital intelligence client
-│           ├── triage.py            # ML pipeline inference orchestrator
-│           ├── llm/                 # Gemini, Grok, and Mock LLM adapters
-│           └── memory/              # Session memory providers (SQLite / AWS)
-├── frontend/
-│   ├── Dockerfile                   # Multi-stage Nginx container build
-│   ├── package.json                 # Frontend package manifest
-│   ├── vite.config.ts               # Vite configuration and backend API proxy
-│   ├── index.html                   # HTML entrypoint
-│   └── src/
-│       ├── main.tsx                 # Root application component
-│       ├── styles.css               # Clinical blue design system
-│       ├── i18n.ts                  # Localization dictionaries (EN/HI/Hinglish)
-│       ├── lib/api.ts               # Type-safe API client
-│       └── components/
-│           ├── AuthPages.tsx        # Login, Register, and OTP interfaces
-│           ├── Brand.tsx            # Application branding and navigation header
-│           └── Dialog.tsx           # Accessible modal dialog component
-├── data/
-│   └── provided/                    # Unaltered Sanocare synthetic datasets
-├── models/
-│   └── baseline/                    # Serialized TF-IDF classification pipelines
-├── notebooks/
-│   └── triagegrid_training.ipynb    # Reproducible model training workbook
-├── scripts/
-│   ├── audit_data.py                # Dataset integrity and checksum checks
-│   ├── train_models.py              # Baseline pipeline training script
-│   └── make_predictions_csv.py      # Batch evaluation inference CLI
-├── docs/                            # Architecture, data audit, and security specs
-├── reports/                         # Evaluation benchmarks and verification logs
-├── compose.yaml                     # Docker Compose multi-service manifest
-├── run_backend.py                   # Cross-platform backend server launcher
-├── package.json                     # Monorepo root task runner
-├── pytest.ini                       # Test suite runner settings
-├── LICENSE                          # MIT License
-└── README.md                        # Project documentation
-```
+![Intake Understanding](step_2_intake_understanding_blue_theme/screen.png)
 
 ---
 
-## Machine Learning and Clinical Models
+### 🔍 Follow-Up & Adaptive Clarification
+> Targeted follow-up clarifying ambiguities without repetitive prompts when symptoms require additional clinical context.
 
-TriageGrid employs two specialized classification pipelines trained on the Sanocare synthetic triage dataset (340 annotated interactions, 65 distinct patient expressions):
-
-1. **Care Type Classifier:** Evaluates n-gram token distributions to assign requests to appropriate services (`paramedic_home_visit`, `teleconsultation`, `nurse_visit`, `in_clinic`).
-2. **Urgency Classifier:** Determines clinical urgency levels (`routine`, `same_day`, `emergency`).
-
-### Performance Metrics (Grouped Cross-Validation)
-
-- **Care Type Classification:** Macro-F1: 0.6466
-- **Urgency Classification:** Macro-F1: 0.6116
-
-Pipelines utilize TF-IDF word (1-3 n-grams) and character (3-5 n-grams) feature extraction combined with balanced Logistic Regression. Artifacts are stored under `models/baseline/` and loaded at runtime without unverified external network dependencies.
+![Follow-Up Clarification](step_3_follow_up_clarification_aligned_blue_theme/screen.png)
 
 ---
 
-## Local Setup and Installation
+### 📋 Clinical Care Recommendation & Urgency Triage
+> Machine-learned categorization classifying request into proper care levels and urgency status with clear factual reasoning.
 
-### Prerequisites
-
-- **Python:** Version 3.10 or higher
-- **Node.js:** Version 18.0 or higher
-- **Git:** Installed and available in terminal path
+![Care Recommendation](step_4_care_recommendation_aligned_blue_theme/screen.png)
 
 ---
 
-### Environment Configuration
+### 👨‍⚕️ Caregiver Matching & Slot Reservation
+> Qualified caregivers ranked by distance, role eligibility, patient language alignment, and verified schedule availability.
 
-Create a local environment file by copying the template:
+![Matched Caregivers](step_5_matched_caregivers_aligned_blue_theme/screen.png)
+
+---
+
+### ⚙️ App Settings & Accessibility Preferences
+> Granular user settings including language selection (English, Hindi, Hinglish), text magnification, and reduced motion.
+
+![App Settings](triagegrid_app_settings_preferences/screen.png)
+
+---
+
+### 👤 Patient Profile & Care History
+> Manage registered patient credentials, contact details, emergency guardians, and historical triage sessions.
+
+![Registered Profile](triagegrid_registered_profile_edit/screen.png)
+
+---
+
+## 🧪 Clinical Modules & Architecture Highlights
+
+| Module | Description |
+|---|---|
+| 🚨 **Emergency Escalation Protocol** | Bypasses non-urgent matching when acute red flags are detected, guiding the patient directly to emergency services. |
+| 🏥 **Golden Bay Handover Preview** | Consented digital patient transfer preview simulating an emergency department triage receiver dashboard. |
+| 🌐 **TinyFish Web Intelligence** | Real-time scraper fetching public phone numbers and emergency desk addresses from official hospital portals (e.g., AIIMS). |
+| 🤖 **Interchangeable LLM Adapters** | Plug-and-play architecture supporting Google Gemini v1beta, xAI Grok, and a deterministic local Mock adapter. |
+| 🔒 **Transactional Slot Protection** | SQLite ACID transactions enforcing slot reservation idempotency and eliminating concurrent double-booking. |
+| 📊 **Grouped Model Evaluation** | Grouped k-fold validation on Sanocare synthetic datasets ensuring no train-test data leakage across repeated utterances. |
+
+---
+
+## 📊 Machine Learning Performance
+
+The baseline models were trained on the Sanocare synthetic care-triage dataset v1 (340 rows, 65 distinct patient expressions):
+
+- **Care Type Pipeline:** TF-IDF (word 1-3, char 3-5) + Logistic Regression — **Macro-F1: 0.6466**
+- **Urgency Pipeline:** TF-IDF (word 1-3, char 3-5) + Logistic Regression — **Macro-F1: 0.6116**
+
+![Model Confusion Matrix](triage_app/triage_app/artifacts/confusion_matrix.png)
+
+---
+
+## ⚡ Quick Start
+
+> **Requirements:** Node.js 18+ and Python 3.10+
+
+### 1. Clone and Configure
 
 ```sh
+# Clone the repository
+git clone https://github.com/nikhil-kumarrr/TriageGrid-IIITD.git
+cd TriageGrid-IIITD
+
+# Copy environment template
 cp .env.example .env
 ```
 
-Available configuration keys:
-
-| Variable | Default | Purpose |
-|---|---|---|
-| `GEMINI_API_KEY` | None | Google Gemini API key for conversational AI |
-| `GROK_API_KEY` | None | xAI Grok API key (alternative LLM adapter) |
-| `LLM_PROVIDER` | `mock` | Active LLM adapter: `gemini`, `grok`, or `mock` |
-| `TINYFISH_API_KEY` | None | API key for external emergency web research |
-| `TRIAGEGRID_DATABASE_URL` | `sqlite:///./var/triagegrid.db` | Database connection string |
-| `TRIAGEGRID_PORT` | `8000` | Port for FastAPI backend service |
-
----
-
-### Backend Setup (FastAPI)
-
-1. Navigate to the project root directory and create a Python virtual environment:
+### 2. Backend Setup (FastAPI)
 
 ```sh
+# Create and activate virtual environment
 python -m venv .venv
-```
+# Windows: .venv\Scripts\activate
+# Linux/macOS: source .venv/bin/activate
 
-2. Activate the virtual environment:
-
-- **Linux / macOS:**
-  ```sh
-  source .venv/bin/activate
-  ```
-- **Windows (PowerShell):**
-  ```powershell
-  .venv\Scripts\Activate.ps1
-  ```
-- **Windows (Command Prompt):**
-  ```cmd
-  .venv\Scripts\activate.bat
-  ```
-
-3. Install required Python packages:
-
-```sh
+# Install dependencies
 pip install -r backend/requirements.txt
-```
 
-4. Start the backend server:
-
-```sh
+# Launch backend API server (runs on http://127.0.0.1:8000)
 python run_backend.py
 ```
 
-The backend server initializes on `http://127.0.0.1:8000`. Interactive OpenAPI documentation is accessible at `http://127.0.0.1:8000/docs`.
+*Interactive API docs available at `http://127.0.0.1:8000/docs`.*
 
----
+### 3. Frontend Setup (React 19 + Vite)
 
-### Frontend Setup (React + Vite)
-
-From a separate terminal window:
-
-1. Navigate to the frontend directory:
+In a new terminal window:
 
 ```sh
 cd frontend
-```
 
-2. Install dependencies:
-
-```sh
+# Install packages
 npm install
-```
 
-3. Start the development server:
-
-```sh
+# Start Vite development server
 npm run dev
 ```
 
-4. Open `http://127.0.0.1:5173` in your browser. All requests to `/api` are automatically forwarded to the backend running on port 8000.
+*Access the application at `http://127.0.0.1:5173`.*
 
 ---
 
-### Root-Level Convenience Scripts
+## 🐳 Docker Deployment
 
-If preferred, run standard lifecycle tasks directly from the repository root:
-
-```sh
-npm run dev        # Starts frontend Vite development server
-npm run build      # Executes TypeScript validation and builds frontend assets
-npm run backend    # Launches Python backend server launcher
-```
-
----
-
-### Docker Deployment
-
-To build and run both the backend API and frontend Nginx proxy inside isolated containers:
+Run the entire full-stack application with a single command:
 
 ```sh
 docker compose up --build
 ```
 
-- Web Application: `http://localhost:3000`
-- Backend API Docs: `http://localhost:8000/docs`
+- **Frontend Application:** `http://localhost:3000`
+- **Backend API Docs:** `http://localhost:8000/docs`
 
 ---
 
-## API Reference
-
-### Core Endpoints
-
-#### 1. System Health
-- **Endpoint:** `GET /api/health`
-- **Description:** Verifies service connectivity, active LLM adapter, and demo credentials.
-
-#### 2. Triage Prediction
-- **Endpoint:** `POST /api/triage/predict`
-- **Request Body:**
-  ```json
-  {
-    "user_input": "Mujhe 2 din se tez bukhar hai aur sar dard ho raha hai",
-    "language": "auto",
-    "location": { "lat": 28.54, "lng": 77.27 },
-    "conversation_history": []
-  }
-  ```
-- **Response Body:**
-  ```json
-  {
-    "follow_up_question": null,
-    "care_type": "paramedic_home_visit",
-    "urgency": "same_day",
-    "red_flags": [],
-    "reasoning": "Reported persistent fever with headache, no acute respiratory distress.",
-    "matched_caregivers": [
-      {
-        "caregiver_id": "CG_014",
-        "full_name": "Rohan Verma",
-        "score": 0.92,
-        "distance_km": 3.2,
-        "reason": "Hindi-speaking, within 5 km, available today"
-      }
-    ]
-  }
-  ```
-
-#### 3. Conversational Assistant
-- **Endpoint:** `POST /api/chat/message`
-- **Description:** Multi-turn intake dialogue engine extracting symptom slots, assessing red flags, and producing conversational guidance.
-
-#### 4. Booking Reservations
-- **Endpoint:** `POST /api/bookings`
-- **Description:** Secures a designated caregiver time slot with transactional conflict validation.
-
-#### 5. Hospital Intelligence
-- **Endpoint:** `POST /api/hospital/research`
-- **Description:** Dispatches a scoped TinyFish web agent to extract publicly listed contact numbers and emergency desk locations.
-
----
-
-## Testing and Verification
-
-The test suite covers data integrity, model inference, safety red flags, booking concurrency, session ownership, and multi-turn conversational extraction.
-
-Run the test suite from the project root:
+## 🧪 Testing and Verification
 
 ```sh
-# Run backend tests
+# Run backend test suite (52 automated tests)
 PYTHONPATH=backend pytest backend/tests -v
 
-# Verify dataset checksums and integrity
+# Run dataset validation audit
 python scripts/audit_data.py
 
-# Type-check and build frontend bundle
-cd frontend && npm run build
+# Test frontend type-checking and production build
+npm run build
 ```
 
 ---
 
-## Clinical Disclaimer and Limitations
+## 🛡️ Clinical Disclaimer & Ethics
 
-- **Educational & Prototype Use Only:** TriageGrid was developed as a competition prototype for the CareCompass challenge at IIIT-Delhi.
-- **Not Medical Advice:** This software does not provide clinical diagnosis, medical triage, treatment recommendations, or drug prescription.
-- **Synthetic Data:** The system operates exclusively on synthetic datasets provided by Sanocare Tech Innovations Pvt Ltd. No protected health information (PHI) or real patient records are utilized.
-- **Simulated Emergency Handover:** Hospital communication screens (Golden Bay) and caregiver bookings are local mock simulations and do not dispatch medical personnel or alert emergency departments.
+- **Prototype Demonstration:** TriageGrid was developed exclusively as an academic prototype for the IIIT-Delhi CareCompass hackathon.
+- **Not Medical Advice:** This system is not a certified medical device and does not provide clinical diagnoses, treatments, or prescriptions.
+- **100% Synthetic Data:** Operates strictly on synthetic benchmarks provided by Sanocare Tech Innovations Pvt Ltd. No real patient data (PHI/PII) is processed or stored.
+- **Simulated Operations:** Hospital handover screens and caregiver bookings are local mock simulations and do not dispatch actual emergency personnel.
 
 ---
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for complete details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
