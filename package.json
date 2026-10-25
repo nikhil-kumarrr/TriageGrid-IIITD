@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "TriageGrid Full-Stack Healthcare Navigation Application",
+  "license": "MIT",
   "scripts": {
     "dev": "npm --prefix frontend run dev",
     "build": "npm --prefix frontend run build",

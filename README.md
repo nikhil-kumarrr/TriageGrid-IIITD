@@ -165,3 +165,7 @@ This build is intended for local synthetic-data demonstration with one API worke
 Baseline grouped model-selection macro-F1: care type 0.6466; urgency 0.6116. These are not independent clinical validation. Lexical rules have limited language/context coverage. Some source emergency annotations are inconsistent. A successful TinyFish run returned published AIIMS information; that is not verification of bed status or real-time emergency capacity. Speech depends on browser/platform and may use remote recognition. Audio is not stored by this app.
 
 Same-day care is restricted to today (IST); it cannot be postponed through the slot picker or API. The seven-day planning horizon applies to scheduled care only.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
