@@ -13,7 +13,6 @@
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![CI](https://github.com/nikhil-kumarrr/TriageGrid-IIITD/actions/workflows/ci.yml/badge.svg)](https://github.com/nikhil-kumarrr/TriageGrid-IIITD/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![CI](https://github.com/nikhil-kumarrr/TriageGrid-IIITD/actions/workflows/ci.yml/badge.svg)](https://github.com/nikhil-kumarrr/TriageGrid-IIITD/actions/workflows/ci.yml)
 
 *Multilingual conversational intake · Machine-learned care categorization · Qualification-based caregiver matching · Emergency hospital intelligence*
 
@@ -215,6 +214,16 @@ npm run build
 
 ---
 
+## 🤝 Community & Contributing
+
+Contributions are welcome! Please check our community guidelines:
+- [Contributing Guide](CONTRIBUTING.md) — Setup instructions, git workflow, and testing practices.
+- [Code of Conduct](CODE_OF_CONDUCT.md) — Contributor Covenant v2.1 standards.
+- [Security Policy](SECURITY.md) — Vulnerability reporting and data boundary guidelines.
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
