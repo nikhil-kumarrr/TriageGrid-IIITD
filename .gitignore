@@ -3,14 +3,57 @@
 .env.*
 !.env.example
 .venv/
+env/
+venv/
+ENV/
+
+# Python caches and bytecode
 **/__pycache__/
 *.py[cod]
+*$py.class
+*.so
 .pytest_cache/
-node_modules/
-dist/
-coverage/
-*.sqlite3
-*.sqlite3-*
-.DS_Store
+.mypy_cache/
+.ruff_cache/
 reports/local/
 var/
+
+# Testing and coverage
+coverage/
+.coverage
+.coverage.*
+htmlcov/
+*.lcov
+
+# Databases
+*.sqlite3
+*.sqlite3-*
+*.db
+
+# Frontend and Node
+node_modules/
+dist/
+build/
+.npm
+frontend/dist/
+frontend/.vite/
+
+# IDE and Editor configurations
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+*.log
+

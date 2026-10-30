@@ -11,7 +11,9 @@
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6+-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![Gemini](https://img.shields.io/badge/Gemini-REST_API-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![CI](https://github.com/nikhil-kumarrr/TriageGrid-IIITD/actions/workflows/ci.yml/badge.svg)](https://github.com/nikhil-kumarrr/TriageGrid-IIITD/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![CI](https://github.com/nikhil-kumarrr/TriageGrid-IIITD/actions/workflows/ci.yml/badge.svg)](https://github.com/nikhil-kumarrr/TriageGrid-IIITD/actions/workflows/ci.yml)
 
 *Multilingual conversational intake · Machine-learned care categorization · Qualification-based caregiver matching · Emergency hospital intelligence*
 
